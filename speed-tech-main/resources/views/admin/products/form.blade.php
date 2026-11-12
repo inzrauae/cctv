@@ -1,0 +1,138 @@
+@extends('admin.layout', [
+  'title' => $product->exists ? $product->name : 'New product',
+  'breadcrumb' => '<a href="'.route('admin.products.index').'">Products</a> /',
+])
+
+@section('actions')
+  @if ($product->exists)<a class="btn" href="{{ $product->url() }}" target="_blank" rel="noopener">View in store ↗</a>@endif
+@endsection
+
+@section('content')
+  <form method="post" enctype="multipart/form-data" action="{{ $product->exists ? route('admin.products.update', $product) : route('admin.products.store') }}" id="productForm">
+    @csrf
+    @if ($product->exists) @method('PUT') @endif
+
+    <div class="layout-form">
+      <div>
+        <section class="card">
+          <h2>Basics</h2>
+          <div class="form-grid">
+            <label class="field span-2">Name<input name="name" value="{{ old('name', $product->name) }}" required maxlength="200"></label>
+            <label class="field">Shop category
+              <select name="category_id" required><option value="">Choose…</option>@foreach ($categories as $c)<option value="{{ $c->id }}" @selected(old('category_id', $product->category_id) == $c->id)>{{ $c->name }}</option>@endforeach</select>
+            </label>
+            <label class="field">Card label <small>(e.g. NIGHT VISION)</small><input name="tag" value="{{ old('tag', $product->tag) }}" maxlength="40"></label>
+            <label class="field span-2">Short summary <small>(shown on product cards)</small><input name="summary" value="{{ old('summary', $product->summary) }}" maxlength="500"></label>
+            <label class="field span-2">Description<textarea name="description" rows="6" maxlength="10000">{{ old('description', $product->description) }}</textarea></label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Search engines (SEO) <small>Shown in Google results. Blank = name and summary.</small></h2>
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <label class="field">Meta title <small>(about 60 characters) <span data-count="meta_title"></span></small><input name="meta_title" value="{{ old('meta_title', $product->meta_title) }}" maxlength="120"></label>
+            <label class="field">Meta description <small>(about 155 characters) <span data-count="meta_description"></span></small><textarea name="meta_description" rows="2" maxlength="300">{{ old('meta_description', $product->meta_description) }}</textarea></label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Product details</h2>
+          <div class="form-grid three">
+            <label class="field">Brand
+              <select name="brand"><option value="">No brand / other</option>@foreach (config('shop.brands') as $name)<option value="{{ $name }}" @selected(old('brand', $product->brand) === $name)>{{ $name }}</option>@endforeach</select>
+            </label>
+            <label class="field">Model number<input name="oem_part_number" value="{{ old('oem_part_number', $product->oem_part_number) }}" maxlength="100"></label>
+            <label class="field">Product code / SKU <small>(blank = auto, e.g. CAM-00012)</small><input name="sku" value="{{ old('sku', $product->sku) }}" maxlength="100" placeholder="Generated on save"></label>
+            <label class="field">Warranty<input name="warranty" value="{{ old('warranty', $product->warranty) }}" maxlength="100" placeholder="1 year"></label>
+            <label class="field span-2">Key specifications<input name="specification" value="{{ old('specification', $product->specification) }}" maxlength="255" placeholder="2MP, IR night vision 20 m, IP66"></label>
+          </div>
+        </section>
+
+      </div>
+
+      <div>
+        <section class="card">
+          <h2>Price &amp; stock</h2>
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <label class="field">Regular price (Rs.) <small>— leave empty for "Price on request"</small><input type="number" name="price" value="{{ old('price', $product->price) }}" min="0" step="0.01"></label>
+            <fieldset class="offer-fields">
+              <legend>Offer <small>(optional)</small></legend>
+              <label class="field">Offer price (Rs.) <small>— lower than the regular price. Shows the product in “Offers”.</small><input type="number" name="offer_price" value="{{ old('offer_price', $product->offer_price) }}" min="0" step="0.01"></label>
+              <label class="field">Offer ends <small>— last day of the offer; empty = until you remove it</small><input type="date" name="offer_ends_at" value="{{ old('offer_ends_at', $product->offer_ends_at?->format('Y-m-d')) }}"></label>
+              @if ($product->exists && $product->offer_price !== null)
+                <p class="help">{{ $product->hasOffer() ? 'Offer is live: -'.$product->discountPercent().'%.' : 'Offer is not live (expired, or not lower than the regular price).' }} Clear the offer price to end it.</p>
+              @endif
+            </fieldset>
+            <label class="field">Cost price (Rs.) <small>— what you pay; used for stock value</small><input type="number" name="cost_price" value="{{ old('cost_price', $product->cost_price) }}" min="0" step="0.01"></label>
+            <label class="field">{{ $product->exists ? 'Stock quantity' : 'Opening stock' }} <small>— changes are logged in the stock history</small><input type="number" name="stock_qty" value="{{ old('stock_qty', $product->stock_qty ?? 0) }}" min="0" required></label>
+            <label class="field">Reorder level <small>— warn me when stock is at or below</small><input type="number" name="reorder_level" value="{{ old('reorder_level', $product->reorder_level ?? 3) }}" min="0"></label>
+          </div>
+          <p class="help" style="margin-top:12px">Customers can buy online only when there is a price and stock above 0. Otherwise they send an enquiry.</p>
+          @if ($product->exists)
+            <a class="link" href="{{ route('admin.inventory.index', ['q' => $product->sku ?: $product->name]) }}">Receive or adjust stock →</a>
+          @endif
+        </section>
+
+        @if ($product->exists)
+          <section class="card">
+            <h2>Stock history <a class="link" href="{{ route('admin.inventory.movements', ['product' => $product->id]) }}">All</a></h2>
+            @php($history = $product->stockMovements()->with('user')->take(6)->get())
+            @forelse ($history as $m)
+              <div class="mini-move">
+                <span class="badge {{ $m->quantity > 0 ? 'in' : 'out' }}">{{ $m->quantity > 0 ? '+' : '' }}{{ $m->quantity }}</span>
+                <span>{{ $m->typeLabel() }}@if ($m->reference) · {{ $m->reference }}@endif<small>{{ $m->created_at->format('d M Y, H:i') }} · balance {{ $m->balance_after }}</small></span>
+              </div>
+            @empty
+              <p class="help">No stock movements yet.</p>
+            @endforelse
+          </section>
+        @endif
+
+        <section class="card">
+          <h2>Visibility</h2>
+          <input type="hidden" name="is_active" value="0"><label class="check"><input type="checkbox" name="is_active" value="1" @checked(old('is_active', $product->is_active))> Visible in the store</label><br><br>
+          <input type="hidden" name="is_featured" value="0"><label class="check"><input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $product->is_featured))> Featured on the home page</label>
+          <label class="field" style="margin-top:14px">URL slug <small>(optional)</small><input name="slug" value="{{ old('slug', $product->slug) }}" maxlength="200"></label>
+        </section>
+
+        <section class="card">
+          <h2>Image</h2>
+          <img class="image-preview" src="{{ $product->imageUrl() }}" alt="" id="imagePreview">
+          <label class="field">Upload JPG, PNG or WebP (max 4 MB)<input type="file" name="image" accept="image/jpeg,image/png,image/webp" id="imageInput"></label>
+          @if ($product->image)<label class="check" style="margin-top:10px"><input type="checkbox" name="remove_image" value="1"> Remove current image</label>@endif
+        </section>
+
+        <div class="form-actions">
+          <button class="btn primary" type="submit">{{ $product->exists ? 'Save changes' : 'Create product' }}</button>
+          <a class="btn" href="{{ route('admin.products.index') }}">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  @if ($product->exists)
+    <form method="post" action="{{ route('admin.products.destroy', $product) }}" data-confirm="Delete “{{ $product->name }}” permanently? Past orders keep their copy of the name and price." style="margin-top:24px">
+      @csrf @method('DELETE')
+      <button class="btn danger" type="submit"><svg class="icon"><use href="#icon-trash"/></svg>Delete product</button>
+      <span class="help">Tip: untick "Visible in the store" to hide it without deleting.</span>
+    </form>
+  @endif
+@endsection
+
+@push('scripts')
+<script>
+  (() => {
+    const form = document.getElementById('productForm');
+    form.querySelectorAll('[data-count]').forEach(counter => {
+      const input = form.querySelector(`[name="${counter.dataset.count}"]`);
+      const show = () => { counter.textContent = `· ${input.value.length} now`; };
+      input.addEventListener('input', show); show();
+    });
+
+    document.getElementById('imageInput')?.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) document.getElementById('imagePreview').src = URL.createObjectURL(file);
+    });
+  })();
+</script>
+@endpush

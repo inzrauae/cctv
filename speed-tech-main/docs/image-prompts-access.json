@@ -1,0 +1,78 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "edit",
+  "use_case": "precise-object-edit",
+  "style": "Realistic ecommerce products on pure white #FFFFFF edge-to-edge background, faint neutral contact shadows, existing device silhouettes retained; no advertising graphics.",
+  "output": {
+    "width": 1200,
+    "height": 900,
+    "format": "JPEG",
+    "quality": 90
+  },
+  "assets": [
+    {
+      "name": "ezviz-dl50fvs",
+      "asset": "public/assets/products/ezviz-dl50fvs.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog product photograph. Image 1 is the edit target. Replace only the pale gray background and floor with a flat, solid, pure white RGB(255,255,255) #FFFFFF background, extending edge to edge, with all four corners and edges absolutely white. No gradient, no gray tint, no room, no plinth, no pedestal or added scenery. A faint neutral contact shadow immediately under the devices is acceptable; everything else behind them must be pure white. Preserve exactly the existing product silhouette, proportions, original device branding, glass reflections, metal textures, panels, screens, hardware, placement, scale, and complete uncropped front/rear pairs or kit components. Keep this a realistic studio product photograph. The doorway photos visible inside device screens are part of the product and must remain. No advertising copy, price labels, badges, watermarks or extra objects. Landscape 4:3 composition. Do not redesign the products.",
+      "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-f76db34c-5492-44a4-8a5a-9a85f3295d2b.png",
+      "references": [
+        {
+          "role": "edit target (previous product photo, prior to replacement)",
+          "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-909f5493-078f-4493-898d-4d718aba1a0f.png"
+        }
+      ]
+    },
+    {
+      "name": "ezviz-dl05",
+      "asset": "public/assets/products/ezviz-dl05.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog product photograph. Image 1 is the edit target. Replace only the pale gray background and floor with a flat, solid, pure white RGB(255,255,255) #FFFFFF background, extending edge to edge, with all four corners and edges absolutely white. No gradient, no gray tint, no room, no plinth, no pedestal or added scenery. A faint neutral contact shadow immediately under the devices is acceptable; everything else behind them must be pure white. Preserve exactly the existing product silhouette, proportions, original device branding, glass reflections, metal textures, panels, screens, hardware, placement, scale, and complete uncropped front/rear pairs or kit components. Keep this a realistic studio product photograph. The doorway photos visible inside device screens are part of the product and must remain. No advertising copy, price labels, badges, watermarks or extra objects. Landscape 4:3 composition. Do not redesign the products.",
+      "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-31c73487-7e1a-4020-89b3-2f826d69516b.png",
+      "references": [
+        {
+          "role": "edit target (previous product photo, prior to replacement)",
+          "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-e6db4e06-4fad-47d4-90d2-3ba89c51c89d.png"
+        }
+      ]
+    },
+    {
+      "name": "hikvision-ds-k4sl500mkw",
+      "asset": "public/assets/products/hikvision-ds-k4sl500mkw.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog product photograph. Image 1 is the edit target. Replace only the pale gray background and floor with a flat, solid, pure white RGB(255,255,255) #FFFFFF background, extending edge to edge, with all four corners and edges absolutely white. No gradient, no gray tint, no room, no plinth, no pedestal or added scenery. A faint neutral contact shadow immediately under the devices is acceptable; everything else behind them must be pure white. Preserve exactly the existing product silhouette, proportions, original device branding, glass reflections, metal textures, panels, screens, hardware, placement, scale, and complete uncropped front/rear pairs or kit components. Keep this a realistic studio product photograph. The doorway photos visible inside device screens are part of the product and must remain. No advertising copy, price labels, badges, watermarks or extra objects. Landscape 4:3 composition. Do not redesign the products.",
+      "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-59425fae-e3cb-4554-b8ee-8bb2e247a52a.png",
+      "references": [
+        {
+          "role": "edit target (previous product photo, prior to replacement)",
+          "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-42ee0afc-e581-47d0-a0b7-757b69da6a8d.png"
+        }
+      ]
+    },
+    {
+      "name": "hikvision-ds-kis602-b",
+      "asset": "public/assets/products/hikvision-ds-kis602-b.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog product photograph. Image 1 is the edit target. Replace only the pale gray background and floor with a flat, solid, pure white RGB(255,255,255) #FFFFFF background, extending edge to edge, with all four corners and edges absolutely white. No gradient, no gray tint, no room, no plinth, no pedestal or added scenery. A faint neutral contact shadow immediately under the devices is acceptable; everything else behind them must be pure white. Preserve exactly the existing product silhouette, proportions, original device branding, glass reflections, metal textures, panels, screens, hardware, placement, scale, and complete uncropped front/rear pairs or kit components. Keep this a realistic studio product photograph. The doorway photos visible inside device screens are part of the product and must remain. No advertising copy, price labels, badges, watermarks or extra objects. Also correct the small Ethernet switch to show exactly five distinct RJ45 sockets across its front: four PoE ports and a fifth uplink port at the right, following the second reference image. Keep the switch box shape and other kit components unchanged. Landscape 4:3 composition. Do not redesign the products.",
+      "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-b5a1056f-6e3f-4db9-b2ed-8ebf0a3f3cac.png",
+      "references": [
+        {
+          "role": "edit target (previous product photo, prior to replacement)",
+          "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-adc4bced-fd06-440f-909e-66366de269d7.png"
+        },
+        {
+          "role": "five-port switch reference",
+          "source": "public/assets/products/ads/hikvision-ds-kis602-b.jpg"
+        }
+      ]
+    },
+    {
+      "name": "hikvision-ds-kis603-p",
+      "asset": "public/assets/products/hikvision-ds-kis603-p.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog product photograph. Image 1 is the edit target. Replace only the pale gray background and floor with a flat, solid, pure white RGB(255,255,255) #FFFFFF background, extending edge to edge, with all four corners and edges absolutely white. No gradient, no gray tint, no room, no plinth, no pedestal or added scenery. A faint neutral contact shadow immediately under the devices is acceptable; everything else behind them must be pure white. Preserve exactly the existing product silhouette, proportions, original device branding, glass reflections, metal textures, panels, screens, hardware, placement, scale, and complete uncropped front/rear pairs or kit components. Keep this a realistic studio product photograph. The doorway photos visible inside device screens are part of the product and must remain. No advertising copy, price labels, badges, watermarks or extra objects. Landscape 4:3 composition. Do not redesign the products.",
+      "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-c7de835a-766f-4cd2-bcd4-77ee20494c8f.png",
+      "references": [
+        {
+          "role": "edit target (previous product photo, prior to replacement)",
+          "source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffb-8d2a-7841-bad7-3cfd79440c02\\exec-97fb869f-2ef5-4172-b429-4b9c226bb6b2.png"
+        }
+      ]
+    }
+  ]
+}

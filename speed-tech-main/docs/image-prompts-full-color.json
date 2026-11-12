@@ -1,0 +1,52 @@
+{
+  "mode": "built-in image_gen",
+  "use_case": "precise-object-edit",
+  "style": "Realistic product photography on pure solid white #FFFFFF with faint neutral contact shadows; exact camera and accessory counts preserved; no advertising overlays",
+  "assets": [
+    {
+      "camera_count": 4,
+      "power_adapter_count": 4,
+      "bnc_connector_count": 8,
+      "generated_source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-b1d480f0-d281-4c17-a3f2-1afeca0666a6.png",
+      "output": "public/assets/products/hikvision-4ch-full-color-package.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog photograph, 4:3 landscape.\nEdit target: this Hikvision full-colour CCTV package product photograph.\nPrimary request: change ONLY the backdrop and floor to perfectly PURE SOLID WHITE #FFFFFF with no gray tint, no gradient, no horizon, no pedestal and no extra props. All four corners and all outer edges MUST be uniform #FFFFFF. This is a white background catalog image.\nPreserve the equipment's appearance, material, positions and full uncut framing: exactly 4 white bullet cameras with black square faces and warm LED, one black DVR recorder, one light-gray vented cabinet, one silver surveillance hard drive, one black cable coil, exactly 4 black power adapters, exactly 8 silver BNC connectors. \nKeep the camera total EXACTLY 4; do not add or remove cameras. Equipment must remain photographic and sharp. Allow only a very faint neutral contact shadow immediately under equipment; no broad shadow, background tint or blue cast.\nNo promotional words, prices, new text, callout lines, watermark, decorative graphics. Keep product proportions and clean commercial softbox lighting.",
+      "reference": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-0ccc4fa9-1e46-4b3a-ac04-898b8014c68c.png"
+    },
+    {
+      "camera_count": 5,
+      "power_adapter_count": 5,
+      "bnc_connector_count": 10,
+      "generated_source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-241ea040-93b7-4a4a-9c2d-e772ba01f0d0.png",
+      "output": "public/assets/products/hikvision-5ch-full-color-package.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog photograph, 4:3 landscape.\nEdit target: this Hikvision full-colour CCTV package product photograph.\nPrimary request: change ONLY the backdrop and floor to perfectly PURE SOLID WHITE #FFFFFF with no gray tint, no gradient, no horizon, no pedestal and no extra props. All four corners and all outer edges MUST be uniform #FFFFFF. This is a white background catalog image.\nPreserve the equipment's appearance, material, positions and full uncut framing: exactly 5 white bullet cameras with black square faces and warm LED, one black DVR recorder, one light-gray vented cabinet, one silver surveillance hard drive, one black cable coil, exactly 5 black power adapters, exactly 10 silver BNC connectors. \nKeep the camera total EXACTLY 5; do not add or remove cameras. Equipment must remain photographic and sharp. Allow only a very faint neutral contact shadow immediately under equipment; no broad shadow, background tint or blue cast.\nNo promotional words, prices, new text, callout lines, watermark, decorative graphics. Keep product proportions and clean commercial softbox lighting.",
+      "reference": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-1e18561d-f0a8-4e77-8e65-887b84ada9bb.png"
+    },
+    {
+      "camera_count": 6,
+      "power_adapter_count": 6,
+      "bnc_connector_count": 12,
+      "generated_source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-ab29f6dc-7179-4585-8dac-66c80c381c2d.png",
+      "output": "public/assets/products/hikvision-6ch-full-color-package.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog photograph, 4:3 landscape.\nEdit target: this Hikvision full-colour CCTV package product photograph.\nPrimary request: change ONLY the backdrop and floor to perfectly PURE SOLID WHITE #FFFFFF with no gray tint, no gradient, no horizon, no pedestal and no extra props. All four corners and all outer edges MUST be uniform #FFFFFF. This is a white background catalog image.\nPreserve the equipment's appearance, material, positions and full uncut framing: exactly 6 white bullet cameras with black square faces and warm LED, one black DVR recorder, one light-gray vented cabinet, one silver surveillance hard drive, one black cable coil, exactly 6 black power adapters, exactly 12 silver BNC connectors. \nKeep the camera total EXACTLY 6; do not add or remove cameras. Equipment must remain photographic and sharp. Allow only a very faint neutral contact shadow immediately under equipment; no broad shadow, background tint or blue cast.\nNo promotional words, prices, new text, callout lines, watermark, decorative graphics. Keep product proportions and clean commercial softbox lighting.",
+      "reference": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-366ce706-7484-48e5-9bac-72a1b466a145.png"
+    },
+    {
+      "camera_count": 7,
+      "power_adapter_count": 7,
+      "bnc_connector_count": 14,
+      "generated_source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-a8a1c915-cc32-49c6-868f-41b3f90339be.png",
+      "output": "public/assets/products/hikvision-7ch-full-color-package.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog photograph, 4:3 landscape.\nEdit target: this Hikvision full-colour CCTV package product photograph.\nPrimary request: change ONLY the backdrop and floor to perfectly PURE SOLID WHITE #FFFFFF with no gray tint, no gradient, no horizon, no pedestal and no extra props. All four corners and all outer edges MUST be uniform #FFFFFF. This is a white background catalog image.\nPreserve the equipment's appearance, material, positions and full uncut framing: exactly 7 white bullet cameras with black square faces and warm LED, one black DVR recorder, one light-gray vented cabinet, one silver surveillance hard drive, one black cable coil, exactly 7 black power adapters, exactly 14 silver BNC connectors. Ensure the BNC connectors are EXACTLY FOURTEEN, in two neat rows of SEVEN each; the reference accidentally has only thirteen, add the missing connector.\nKeep the camera total EXACTLY 7; do not add or remove cameras. Equipment must remain photographic and sharp. Allow only a very faint neutral contact shadow immediately under equipment; no broad shadow, background tint or blue cast.\nNo promotional words, prices, new text, callout lines, watermark, decorative graphics. Keep product proportions and clean commercial softbox lighting.",
+      "reference": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-dce44fae-0749-4c00-8b2c-ac964417da92.png"
+    },
+    {
+      "camera_count": 8,
+      "power_adapter_count": 8,
+      "bnc_connector_count": 16,
+      "generated_source": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-b1ad3672-5eb0-4a38-a2b4-2b67761e9ca5.png",
+      "output": "public/assets/products/hikvision-8ch-full-color-package.jpg",
+      "prompt": "Use case: precise-object-edit. Asset type: ecommerce catalog photograph, 4:3 landscape.\nEdit target: this Hikvision full-colour CCTV package product photograph.\nPrimary request: change ONLY the backdrop and floor to perfectly PURE SOLID WHITE #FFFFFF with no gray tint, no gradient, no horizon, no pedestal and no extra props. All four corners and all outer edges MUST be uniform #FFFFFF. This is a white background catalog image.\nPreserve the equipment's appearance, material, positions and full uncut framing: exactly 8 white bullet cameras with black square faces and warm LED, one black DVR recorder, one light-gray vented cabinet, one silver surveillance hard drive, one black cable coil, exactly 8 black power adapters, exactly 16 silver BNC connectors. \nKeep the camera total EXACTLY 8; do not add or remove cameras. Equipment must remain photographic and sharp. Allow only a very faint neutral contact shadow immediately under equipment; no broad shadow, background tint or blue cast.\nNo promotional words, prices, new text, callout lines, watermark, decorative graphics. Keep product proportions and clean commercial softbox lighting.",
+      "reference": "C:\\Users\\inzra\\.codex\\generated_images\\01a1cffc-7e4a-70e3-b7dd-ad0c6669c128\\exec-9d7d8e6f-8762-4f86-bf7c-dc23992942bb.png"
+    }
+  ]
+}

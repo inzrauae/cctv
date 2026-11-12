@@ -1,0 +1,178 @@
+/* ==========================================================================
+   Last Solution — hero animation, about & contact pages, mobile quick actions.
+   ========================================================================== */
+
+/* Hero animation: runs only with JS and when the visitor allows motion */
+@keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes dotPulse{0%{box-shadow:0 0 0 0 #ed171f80}80%,100%{box-shadow:0 0 0 9px #ed171f00}}
+/* Stagger by position, so it applies from the very first frame */
+.hero-anim:nth-child(2){--d:110ms}.hero-anim:nth-child(3){--d:220ms}.hero-anim:nth-child(4){--d:330ms}.hero-anim:nth-child(5){--d:440ms}.hero-anim:nth-child(6){--d:550ms}
+.repair-promises.hero-anim,.service-facts.hero-anim{--d:450ms}
+@media(prefers-reduced-motion:no-preference){
+  .js .hero-anim{opacity:0;animation:heroUp .75s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--d,0ms) + 120ms)}
+  .hero-art{animation:heroZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
+  .hero-float{animation:heroUp .8s .7s cubic-bezier(.2,.7,.2,1) both,heroFloat 5s 1.5s ease-in-out infinite}
+  .hero .status-dot,.repair-hero .status-dot,.page-hero .status-dot{animation:dotPulse 2s ease-out infinite}
+  .buttons .button.red .icon:last-child{transition:transform .2s}
+  .buttons .button.red:hover .icon:last-child{transform:translateX(3px)}
+}
+
+/* Page hero (about, contact) */
+.page-hero{background:linear-gradient(90deg,#101014 0%,#101014ee 50%,#101014a8 100%);color:#fff}
+.page-hero-inner{padding-block:30px 48px}
+.page-hero .eyebrow{color:#c9c6ca;font-size:10px}
+.page-hero h1{font-size:clamp(38px,4.2vw,58px)}
+.page-hero h1 em{color:#ff333b}
+.page-hero-inner>p{color:#d5d3d7;font-size:14px;line-height:1.7;max-width:600px}
+
+/* Contact */
+.contact-methods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:-26px;position:relative;z-index:1}
+.method-card{display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 8px 28px #171b2514;transition:border-color .2s,transform .2s}
+.method-card:hover{border-color:var(--red);transform:translateY(-3px)}
+.method-card .service-icon{margin-bottom:6px}
+.method-card b{font-size:15px}
+.method-card>span:last-child{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.method-whatsapp .service-icon{background:#e9f8ee;color:#1ca944}
+.contact-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:start;padding-block:30px 44px}
+.contact-form h2,.visit-card h2{font-size:26px;margin-bottom:6px}
+.help-text{font-size:13px;color:var(--muted);line-height:1.6}
+.contact-form .form-grid label{font-size:12px;font-weight:500}
+.contact-form textarea{resize:vertical}
+.contact-form .button{margin-top:16px}
+.contact-side{display:grid;gap:16px}
+.map-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);aspect-ratio:16/10}
+.map-card iframe{display:block;width:100%;height:100%;border:0}
+.visit-card>p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.visit-card .google-mark{font-size:18px}
+.visit-card .detail-note{margin-top:14px}
+
+/* About */
+.about-story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center;padding-block:44px}
+.about-story h2{margin:6px 0 14px}
+.about-story p{font-size:14px;color:#4a4c55;line-height:1.75;margin-bottom:12px}
+.about-story img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius)}
+.about-offer{padding-bottom:44px}
+.about-offer h2{margin:6px 0 20px}
+.offer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.offer-card{display:flex;flex-direction:column;gap:10px;padding:22px;border:1px solid var(--line);border-radius:var(--radius);transition:border-color .2s,box-shadow .2s}
+.offer-card:hover{border-color:#ed171f55;box-shadow:0 6px 24px #171b2512}
+.offer-card h3{font-size:22px}
+.offer-card p{font-size:12px;color:var(--muted);line-height:1.6}
+.about-values{background:var(--dark);color:#fff;padding:44px 0;margin-bottom:40px}
+.about-values .eyebrow{color:#eb9297}
+.about-values h2{margin:6px 0 24px}
+.values-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.values-grid .icon{width:34px;height:34px;color:#ff5b62;margin-bottom:12px}
+.values-grid h3{font-size:21px;margin-bottom:6px}
+.values-grid p{font-size:12px;color:#b9b9c2;line-height:1.6}
+
+/* Mobile quick-action bar (hidden on larger screens) */
+.mobile-actions{display:none}
+
+@media(max-width:1000px){
+  .contact-methods{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-main,.about-story{grid-template-columns:1fr}
+  .offer-grid,.values-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:700px){
+  .mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#fffffff2;backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -6px 20px #0000001a}
+  .mobile-actions a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:8px;font-weight:700;font-size:14px;color:#fff}
+  .mobile-actions .icon{width:20px;height:20px}
+  .ma-call{background:var(--dark)}
+  .ma-whatsapp{background:#1ca944}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  #toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+
+  /* 16px form text stops iOS zooming in when a field is tapped */
+  input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}
+
+  /* Comfortable tap targets and spacing */
+  .footer-links>a{padding-block:4px}
+  .breadcrumbs{font-size:12px}
+  .page-title{font-size:30px}
+  .page-hero-inner{padding-block:22px 42px}
+  .page-hero h1{font-size:36px}
+  .page-hero-inner>p{font-size:13px}
+  .contact-methods{gap:10px;margin-top:-22px}
+  .method-card{padding:16px}
+  .contact-main{padding-block:24px 34px}
+  .offer-grid,.values-grid{grid-template-columns:1fr}
+  .about-story{padding-block:30px;gap:24px}
+  .about-story img{order:-1}
+  dialog{max-height:calc(100dvh - 24px);width:calc(100% - 20px);padding:26px 18px}
+  .flash{font-size:12px}
+}
+
+/* Let the part-number input shrink on narrow screens */
+.pn-field input{width:0}
+.pn-search>*{min-width:0}
+
+/* Floating WhatsApp button: pinned bottom-right above 700px */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:20;display:flex;align-items:center;gap:0;height:58px;min-width:58px;padding:0 17px;border-radius:30px;background:#1ca944;color:#fff;font-weight:700;font-size:14px;box-shadow:0 8px 24px #1ca94466,0 2px 6px #0003;transition:background .2s,gap .25s,padding .25s}
+.wa-float .icon{width:26px;height:26px;stroke-width:1.7}
+.wa-float span{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .3s}
+.wa-float:hover,.wa-float:focus-visible{background:#168837;gap:9px;padding-right:22px}
+.wa-float:hover span,.wa-float:focus-visible span{max-width:140px}
+@media(prefers-reduced-motion:no-preference){.wa-float::before{content:"";position:absolute;inset:0;border-radius:inherit;background:#1ca944;z-index:-1;animation:waPing 2.6s ease-out infinite}}
+@keyframes waPing{0%{transform:scale(1);opacity:.55}80%,100%{transform:scale(1.45);opacity:0}}
+@media(max-width:700px){.wa-float{display:none}}
+
+/* About: "since 2003" badge */
+.since-badge{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:12px 18px;border:1px solid #ffffff26;border-radius:8px;background:#0f1014b3;backdrop-filter:blur(8px)}
+.since-badge b{font-family:"Barlow Condensed",Arial,sans-serif;font-size:40px;line-height:1;color:#ff333b}
+.since-badge span{font-size:12px;line-height:1.4;color:#d5d3d7;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+
+/* Social media icons */
+.social{display:flex;align-items:center;gap:8px}
+.social a{display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .2s,color .2s,transform .2s}
+.social-icon{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.top-right{display:flex;align-items:center;gap:16px}
+.social-top a{width:24px;height:24px;border-radius:50%;background:#ffffff14;color:#fff}
+.social-top .social-icon{width:14px;height:14px}
+.social-top a:hover{background:#ffffff2e}
+.social-footer{margin:14px 0 2px}
+.social-footer a{width:38px;height:38px;border-radius:50%;background:#ffffff14;color:#fff}
+.social-footer a:hover{transform:translateY(-2px)}
+.social-footer .social-facebook:hover{background:#1877f2}
+.social-footer .social-google:hover{background:#fff}
+.social-brand{flex-wrap:wrap}
+.social-brand a{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:6px;font-size:13px;font-weight:600;background:#fff}
+.social-brand .social-facebook{color:#1877f2}
+.social-brand a:hover{border-color:currentColor;transform:translateY(-2px)}
+.social-brand .social-google:hover{border-color:#4285f4}
+.follow-us{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.follow-us>span{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+@media(max-width:1000px){.top-right .top-tagline{display:none}}
+@media(max-width:700px){.top-right{display:none}}
+
+/* Checkout payments + bank transfer */
+.pay-option b{display:flex;align-items:center;gap:7px}
+.pay-option b .icon{width:17px;height:17px;color:var(--red)}
+.bank-box{margin-top:12px;padding:14px 16px;border-radius:8px;background:#f6f7fb;border:1px dashed #cfd2dc;font-size:12px;line-height:1.6}
+.bank-box>b{display:block;font-size:13px;margin-bottom:6px}
+.bank-box dl{margin:0 0 8px;display:grid;gap:3px}
+.bank-box dl div{display:flex;gap:10px}
+.bank-box dt{min-width:110px;color:var(--muted)}
+.bank-box dd{margin:0;font-weight:600}
+.bank-box p{margin:4px 0 0;color:var(--muted)}
+.bank-pay{margin-bottom:22px;border-color:#f3c98b;background:#fffaf2}
+.bank-pay h2{font-size:24px;margin-bottom:12px}
+.bank-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.slip-form{display:grid;gap:10px;padding:16px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.slip-form label{font-size:13px;font-weight:600}
+.slip-form label small{font-weight:400;color:var(--muted)}
+.slip-form input[type=file]{display:block;width:100%;margin-top:8px;padding:10px;border:1px dashed #cfd2dc;border-radius:6px;background:#fafafa;font-size:13px}
+.slip-done{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:6px;background:#eefaf1;color:#14632b;font-size:12px;line-height:1.5}
+.slip-done .icon{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+@media(max-width:700px){.bank-pay-grid{grid-template-columns:1fr}.bank-box dt{min-width:96px}}
+/* Contact page phone list */
+.phone-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 16px;padding:14px 0;border-block:1px solid var(--line)}
+.phone-list h3{grid-column:1 / -1;font-size:15px;margin:0 0 2px}
+.phone-list a{display:flex;align-items:center;gap:9px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;font-weight:600;transition:border-color .2s,color .2s}
+.phone-list a:hover{border-color:var(--red);color:var(--red)}.phone-list .icon{width:15px;height:15px;color:var(--red);flex-shrink:0}
+.phone-list .phone-hotline{grid-column:1 / -1;background:#ed171f0a;border-color:#ed171f40}.phone-list .phone-hotline span{font-size:15px}
+.phone-list small{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--red)}
+@media(max-width:700px){.phone-list{grid-template-columns:1fr}}

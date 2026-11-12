@@ -1,0 +1,136 @@
+/* Last Solution: final polish layer (loaded last).
+   One place for the shared type scale, button shape, product cards and spacing,
+   so every page reads as one consistent, professional system. */
+
+:root{
+  --brand-navy:#0b2850;
+  --brand-blue:#1f3f99;
+  --brand-red:#e11e2b;
+  --radius-btn:10px;
+  --radius-card:16px;
+  --shadow-card:0 10px 28px #102f5112;
+  --shadow-card-hover:0 18px 40px #102f5122;
+}
+
+/* ---- Readable base type ---- */
+body{font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.eyebrow{font-size:12px;letter-spacing:1.6px;font-weight:800}
+.section-intro h2,.security-section-heading h2,.section-heading h2{letter-spacing:-.4px}
+.section-intro p{font-size:15px}
+
+/* ---- One button shape everywhere ---- */
+.button{border-radius:var(--radius-btn)!important;min-height:46px;padding:12px 20px;font-size:14px;font-weight:700;letter-spacing:.1px}
+.button .icon{width:18px;height:18px}
+.slide-quote,.showcase-quote,.social-pill,.trio-cta{border-radius:var(--radius-btn)!important}
+
+/* ---- Product cards ---- */
+.products{gap:18px}
+.product{border:1px solid #e3e9f2;border-radius:var(--radius-card);box-shadow:var(--shadow-card);transition:transform .25s,box-shadow .25s,border-color .25s}
+.product:hover{transform:translateY(-4px);box-shadow:var(--shadow-card-hover);border-color:#c9d8ee}
+.product-image{height:auto;aspect-ratio:4/3;background:#fff}
+.product-image img{width:100%;height:100%}
+.is-contain img{padding:18px;background:transparent}
+.product-image.is-contain img{padding:0;background:#fff}
+.product-gallery{background:#fff}
+.product-gallery img{padding:0}
+.product-label{left:12px;top:12px;padding:5px 9px;border-radius:999px;background:#ffffffeb;border:1px solid #e3e9f2;font-size:10px;font-weight:700;letter-spacing:.5px;color:#41506a}
+.product-body{padding:16px 16px 16px}
+.product-body>small{font-size:11px;letter-spacing:.8px;color:#7a879c}
+.product-body h3{font-size:20px;font-weight:700;line-height:1.2;margin:6px 0 6px}
+.product-pn{font-size:12px!important;color:#41506a!important;margin:0 0 6px!important}
+.product-body>p{font-size:13px;line-height:1.55;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-price{font-size:18px}
+.price-was{font-size:13px}
+.stock{font-size:12px}
+.product-add{min-height:44px;border-radius:var(--radius-btn);font-size:14px;font-weight:700;padding:10px 12px}
+.product-add.is-enquiry{background:#fff;color:var(--brand-navy);border-color:#cfdbec}
+.product-add.is-enquiry:hover{background:#f2f6fc}
+.offer-badge{min-width:50px;height:50px;font-size:18px}
+
+/* ---- Section rhythm ---- */
+.home-section,.featured-band{padding-block:72px 48px}
+.why-band,.camera-guide,.home-faq{padding-block:72px}
+.services-showcase{padding-block:80px 72px}
+
+/* ---- Hero: calmer overlay ---- */
+.hero-call{display:none}
+.hero-overlay{justify-content:flex-end}
+
+/* ---- Cleaner cards ---- */
+.property-card:after{display:none}
+.property-card,.guide-card,.reason-card,.feature{border-radius:var(--radius-card)}
+.property-card p,.guide-card li,.reason-card p,.feature p{font-size:13.5px}
+.security-steps h3{font-size:20px}
+.security-steps p,.security-process-intro>p{font-size:14px;line-height:1.7}
+.faq-list summary{font-size:15px}
+.faq-list details p{font-size:14px}
+
+/* ---- Trio row: tidy "Talk to our team" ---- */
+.home-trio{gap:18px;padding-block:24px 64px}
+.trio-card,.trio-promo{border-radius:var(--radius-card)}
+.trio-call{display:flex;flex-direction:column;align-items:flex-start}
+.trio-call .trio-phone{margin-top:12px}
+.trio-call .social-pill{margin-top:12px}
+
+/* ---- Footer ---- */
+.footer-links>a,.footer-contact>a{font-size:14px}
+.footer-about{font-size:14px;line-height:1.7}
+
+@media(max-width:700px){
+  body{font-size:14px}
+  .eyebrow{font-size:11px}
+  .button{min-height:44px;padding:11px 16px;font-size:13.5px}
+  .products{gap:10px}
+  .product-body{padding:12px}
+  .product-body h3{font-size:16px}
+  .product-body>p{font-size:12px;margin-bottom:12px}
+  .product-price{font-size:15px}
+  .product-add{font-size:12.5px;min-height:40px}
+  .product-label{font-size:9px;padding:4px 7px;left:8px;top:8px}
+  .home-section,.featured-band{padding-block:48px 32px}
+  .why-band,.camera-guide,.home-faq{padding-block:48px}
+  .services-showcase{padding-block:52px 48px}
+}
+.product-image img[src*="part-placeholder.svg"]{padding:0;object-fit:cover}
+/* Logo: transparent PNG, no box behind it */
+.logo{aspect-ratio:538/314;object-fit:contain;background:none;border-radius:0}
+.footer-brand img{width:160px;height:auto;aspect-ratio:538/314;padding:0;background:none;border-radius:0;object-fit:contain}
+
+/* ---- Home: alternating section backgrounds (full width) ---- */
+:root{--band-cool:#edf2f9;--band-warm:#fff3f4;--band-white:#ffffff}
+.band-bg,
+.wrap:has(>.cat-strip),.quote-finder,.home-split,.type-tiles,.ref-trio,.maker-section,.home-tips{
+  border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax;
+}
+.wrap:has(>.cat-strip){--band:var(--band-cool);display:flow-root}
+.quote-finder{--band:var(--band-cool);padding-block:40px 64px}
+.home-split{--band:var(--band-white);padding-block:64px}
+.home-offers{background:var(--band-warm);padding-block:64px;border-block:1px solid #f6dde0}
+.offers-cards{background:#fff;border-color:#f3d3d7}
+.type-tiles{--band:var(--band-cool);padding-block:64px}
+.ref-trio{--band:var(--band-white);padding-block:64px}
+.ref-why{background:var(--band-cool)}
+.maker-section{--band:var(--band-cool);padding-block:64px}
+.home-tips{--band:var(--band-white);padding-block:64px}
+.home-faq{background:var(--band-cool);padding-block:64px}
+.benefit-strip{background:#fff;border-top:1px solid #dfe7f2}
+/* white cards stand out on tinted bands */
+.type-tile,.maker-card:not(.maker-other),.finder-card{background:#fff}
+@media(max-width:700px){
+  .quote-finder{padding-block:28px 44px}
+  .home-split,.home-offers,.type-tiles,.ref-trio,.maker-section,.home-tips,.home-faq{padding-block:44px}
+}
+
+/* ---- About / Contact: photo hero like the home page ---- */
+.photo-page-hero{position:relative;overflow:hidden;background:#071a34}
+.photo-page-hero .hero-media{inset:0 0 0 30%}
+.photo-page-hero .hero-fade{background:linear-gradient(90deg,#071a34 0%,#071a34 38%,#071a34d9 45%,#071a3473 60%,#071a3400 80%),linear-gradient(0deg,#071a34cc 0%,#071a3400 30%)}
+.photo-page-hero .page-hero-inner{position:relative;z-index:1;min-height:400px;display:flex;flex-direction:column;justify-content:center;padding-block:36px 56px}
+.photo-page-hero .page-hero-inner>p{max-width:520px}
+@media(max-width:1000px){.photo-page-hero .hero-media{left:14%}.photo-page-hero .hero-fade{background:linear-gradient(90deg,#071a34 0%,#071a34 24%,#071a34cc 40%,#071a3433 75%)}}
+@media(max-width:700px){
+  .photo-page-hero .hero-media{left:0}
+  .photo-page-hero .hero-fade{background:linear-gradient(180deg,#071a3480 0%,#071a34b3 40%,#071a34e6 100%)}
+  .photo-page-hero .page-hero-inner{min-height:340px;padding-block:24px 40px}
+  .photo-page-hero h1,.photo-page-hero .page-hero-inner>p{text-shadow:0 2px 14px #071a34}
+}
