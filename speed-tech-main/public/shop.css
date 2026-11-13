@@ -29,7 +29,7 @@ dialog label small{font-weight:400;color:var(--muted)}
 .price-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
 .stock{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;white-space:nowrap}
 .stock::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
-.stock-in,.stock-low{color:#168837}.stock-soon{color:#b45309}.stock-out{color:var(--muted)}
+.stock-in,.stock-low,.stock-available{color:#168837}.stock-soon{color:#b45309}.stock-out{color:var(--muted)}
 .product-add.is-enquiry{background:#fff;color:var(--ink);border-color:#d9d9e0}
 .product-add.is-enquiry:hover{border-color:var(--red);color:var(--red);background:#fff}
 .product-add.is-added{background:#fff1f2;color:var(--red);border-color:#f6cbd0}

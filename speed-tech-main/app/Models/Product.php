@@ -164,24 +164,29 @@ class Product extends Model
         return $this->price === null ? 'Price on request' : money($this->sellingPrice());
     }
 
-    /** Customer-facing stock text; null when out of stock with no restock planned (nothing is shown). */
+    /**
+     * Customer-facing availability, shown next to the price.
+     * Null (nothing shown) when the product has no price.
+     */
     public function stockLabel(): ?string
     {
         return match ($this->stockState()) {
             'in' => 'In stock',
             'low' => "Only {$this->stock_qty} left",
+            'available' => 'Available',
             'soon' => 'Stock coming soon',
             default => null,
         };
     }
 
-    /** in | low | soon (out of stock, restock on the way) | out */
+    /** in | low | available (priced, no stock count) | soon (restock on the way) | out (no price: hidden) */
     public function stockState(): string
     {
         return match (true) {
             $this->stock_qty > self::LOW_STOCK => 'in',
             $this->stock_qty > 0 => 'low',
             (bool) $this->restock_soon => 'soon',
+            $this->price !== null => 'available',
             default => 'out',
         };
     }
