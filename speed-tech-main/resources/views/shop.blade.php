@@ -1,6 +1,6 @@
 @extends('layouts.app', [
   'title' => $search !== '' ? "Search: {$search}" : trim(($brand ? $brand.' ' : '').($category?->name ?? ($brand ? 'products' : 'Shop'))),
-  'description' => 'Buy CCTV cameras, recorders, alarm systems, smart door locks, intercoms, network and Wi-Fi equipment from Hikvision, EZVIZ, Dahua, Imou, TP-Link and UNV at Last Solution, Nugawela, Kandy.',
+  'description' => 'Buy CCTV cameras, recorders, alarm systems, smart door locks, intercoms, network and Wi-Fi equipment from Hikvision, HiLook, EZVIZ, Dahua, Imou, TP-Link and UNV at Last Solution, Nugawela, Kandy.',
 ])
 
 @section('content')

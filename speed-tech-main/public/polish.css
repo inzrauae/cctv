@@ -169,3 +169,6 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:mani
   body{padding-bottom:0}
   footer{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
 }
+
+/* Brand grid on phones: "Other brand?" sits beside the last brand when that leaves a gap */
+@media(max-width:700px){.maker-grid>.maker-other:nth-child(even){grid-column:auto}}

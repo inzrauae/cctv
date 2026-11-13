@@ -9,7 +9,7 @@ $repairServices = [
         'name' => 'CCTV installation',
         'icon' => 'camera',
         'summary' => 'Security camera systems planned and installed for homes, shops and workplaces.',
-        'description' => 'Tell us about your property and the areas you want to monitor. We plan camera positions, recording and mobile viewing, then install a system suited to your site using brands such as Hikvision, Dahua, EZVIZ, Imou and UNV.',
+        'description' => 'Tell us about your property and the areas you want to monitor. We plan camera positions, recording and mobile viewing, then install a system suited to your site using brands such as Hikvision, HiLook, Dahua, EZVIZ, Imou and UNV.',
         'signs' => ['Moving into a new home or workplace', 'Want to monitor an entrance or boundary', 'Need to check a shop or business after hours', 'Looking for a camera system with night vision'],
         'includes' => ['Site and camera-position discussion', 'Camera and recorder setup', 'System configuration', 'Mobile viewing setup and handover'],
         'turnaround' => 'Scheduled after discussing your site',
@@ -229,7 +229,7 @@ return [
     ],
 
     // Brands we install and sell (used for the brands section and the shop brand filter).
-    'brands' => ['Hikvision', 'EZVIZ', 'Dahua', 'Imou', 'TP-Link', 'UNV'],
+    'brands' => ['Hikvision', 'HiLook', 'EZVIZ', 'Dahua', 'Imou', 'TP-Link', 'UNV'],
 
     // Shop categories shown in the home page category strip (by slug), then "All services".
     'home_strip' => ['cctv-cameras', 'network-wi-fi', 'alarm-systems', 'smart-door-locks', 'intercom-systems'],
@@ -250,7 +250,7 @@ return [
 
     'repair_faqs' => [
         ['What areas do you cover?', 'The team is based in Nugawela, Kandy. Contact us with your location to discuss your project.'],
-        ['Which brands do you work with?', 'We work with Hikvision, EZVIZ, Dahua, Imou, TP-Link and UNV. Tell us if you already have equipment from another brand.'],
+        ['Which brands do you work with?', 'We work with Hikvision, HiLook, EZVIZ, Dahua, Imou, TP-Link and UNV. Tell us if you already have equipment from another brand.'],
         ['Can I get a CCTV installation quote?', 'Yes. Call or WhatsApp us with your location, the type of property and the areas you want to monitor.'],
         ['Can you service an existing CCTV system?', 'Yes. We provide CCTV repair and service. Let us know what is happening with the cameras or recorder.'],
         ['What other services do you offer?', 'Besides CCTV we install alarm systems, smart door locks, intercoms, networks, Wi-Fi and smart home devices. We also install and service A/C, repair refrigerators and washing machines, and install solar power and battery backup systems.'],
