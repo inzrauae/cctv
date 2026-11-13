@@ -27,7 +27,7 @@
   <symbol id="icon-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8Z"/></symbol>
   <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
   <symbol id="icon-wifi" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></symbol>
-  <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M2.5 8.2 15.6 4.7l1.6 5.8-13.1 3.5Z"/><path d="M1.6 6.6 16 2.8"/><circle cx="6.4" cy="10" r="1.1"/><path d="M13.6 11.6v4.2H20M20.5 12.5v7"/></symbol>{{-- CCTV bullet camera on a wall bracket --}}
   <symbol id="icon-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M5 12v8h14v-8M10 20v-5h4v5"/></symbol>
   <symbol id="icon-building" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2m2 0h2M9 11h2m2 0h2M9 15h2m2 0h2M10 21v-3h4v3"/></symbol>
   <symbol id="icon-factory" viewBox="0 0 24 24"><path d="M3 21V10l5 3V10l5 3V10l5 3V4h3v17zM7 17h2m3 0h2m3 0h2"/></symbol>
