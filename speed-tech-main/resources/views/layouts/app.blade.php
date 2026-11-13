@@ -27,7 +27,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="topbar"><div class="wrap topbar-inner"><div class="top-contact">
-    <a href="{{ $shop['maps_url'] }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-pin"/></svg>Nugawela, Kandy</a>
+    <a href="{{ $shop['maps_url'] }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-pin"/></svg>Kandy, Sri Lanka</a>
     <a href="tel:{{ $shop['phone'] }}"><svg class="icon"><use href="#icon-phone"/></svg>Hotline {{ $shop['phone_display'] }}</a>
   </div><div class="top-right"><span class="top-tagline">CCTV · Security · Smart home · A/C · Solar</span>@include('partials.social', ['class' => 'social-top'])</div></div></div>
 
