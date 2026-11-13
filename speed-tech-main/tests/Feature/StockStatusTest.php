@@ -29,7 +29,7 @@ class StockStatusTest extends TestCase
         $this->assertSame(['in', 'In stock'], [$in->stockState(), $in->stockLabel()]);
         $this->assertSame(['low', 'Only 2 left'], [$low->stockState(), $low->stockLabel()]);
         $this->assertSame(['soon', 'Stock coming soon'], [$soon->stockState(), $soon->stockLabel()]);
-        $this->assertSame(['available', 'Available'], [$available->stockState(), $available->stockLabel()]);
+        $this->assertSame(['available', 'In stock'], [$available->stockState(), $available->stockLabel()]);
         $this->assertSame(['out', null], [$noPrice->stockState(), $noPrice->stockLabel()]);
         $this->assertSame('Ask when it arrives', $soon->enquiryLabel());
         $this->assertSame('Check availability', $available->enquiryLabel());
@@ -43,7 +43,7 @@ class StockStatusTest extends TestCase
 
         $this->get(route('shop'))->assertOk()
             ->assertSee('stock stock-available', false)
-            ->assertSee('>Available<', false)
+            ->assertSee('>In stock<', false)
             ->assertSee('Stock coming soon')
             ->assertSee('Ask when it arrives')
             ->assertDontSee('stock stock-out', false)

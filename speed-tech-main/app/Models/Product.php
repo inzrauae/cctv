@@ -173,7 +173,7 @@ class Product extends Model
         return match ($this->stockState()) {
             'in' => 'In stock',
             'low' => "Only {$this->stock_qty} left",
-            'available' => 'Available',
+            'available' => 'In stock',
             'soon' => 'Stock coming soon',
             default => null,
         };
