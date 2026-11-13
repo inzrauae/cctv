@@ -22,7 +22,7 @@
       <div class="hero-copy-stack">
         @foreach ($slides as $i => [$file, $focus, $kicker, $headline, $highlight, $text, $slug, $tab])
           <div @class(['security-copy', 'hero-copy', 'is-active' => $i === 0]) data-copy @if ($i > 0) inert aria-hidden="true" @endif>
-            <div class="eyebrow"><span class="status-dot"></span>{{ $kicker }}</div>
+            <div class="eyebrow"><span class="status-dot"></span>{{ highlight_kandy($kicker) }}</div>
             <p class="hero-title">{{ $headline }}<br><em>{{ $highlight }}</em></p>
             <p>{{ $text }}</p>
             <div class="buttons">

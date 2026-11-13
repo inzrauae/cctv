@@ -10,7 +10,7 @@
     <div class="wrap repair-hero-inner">
       <div>
         <nav class="breadcrumbs light" aria-label="Breadcrumb"><a href="{{ route('home') }}">Home</a><span>/</span><b>Our services</b></nav>
-        <div class="eyebrow hero-anim"><span class="status-dot"></span>LAST SOLUTION · NUGAWELA, KANDY</div>
+        <div class="eyebrow hero-anim"><span class="status-dot"></span>{{ highlight_kandy('LAST SOLUTION · NUGAWELA, KANDY') }}</div>
         <h1 class="hero-anim">Our <em>services.</em></h1>
         <p class="hero-anim">Security, smart home and networking solutions, appliance repair and A/C, and solar power with battery backup, all from one local team.</p>
         <div class="buttons hero-anim">

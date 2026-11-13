@@ -16,7 +16,7 @@
 
   <section class="wrap about-story">
     <div>
-      <div class="eyebrow brand-text">BASED IN NUGAWELA · KANDY</div>
+      <div class="eyebrow brand-text">{{ highlight_kandy('BASED IN NUGAWELA · KANDY') }}</div>
       <h2>Solutions for your home and business.</h2>
       <p>Last Solution (Pvt) Ltd helps homes, shops and workplaces with CCTV camera installation, repairs and servicing, alarm systems, smart door locks, intercoms, networking, Wi-Fi and smart home devices.</p>
       <p>We work with trusted brands including {{ implode(', ', array_slice(config('shop.brands'), 0, -1)) }} and {{ last(config('shop.brands')) }}. Our social pages feature our camera installations, including colour night-vision systems.</p>

@@ -51,3 +51,17 @@ if (! function_exists('responsive_img')) {
         return new \Illuminate\Support\HtmlString('srcset="'.e($srcset).'" sizes="'.e($sizes).'"');
     }
 }
+
+if (! function_exists('highlight_kandy')) {
+    /** Escapes $text and wraps the word "Kandy" in a red map-pin pill (see .place-tag in polish.css). */
+    function highlight_kandy(string $text): \Illuminate\Support\HtmlString
+    {
+        $html = preg_replace(
+            '/\bkandy\b/i',
+            '<span class="place-tag"><svg class="icon" aria-hidden="true"><use href="#icon-pin"/></svg>$0</span>',
+            e($text),
+        );
+
+        return new \Illuminate\Support\HtmlString($html);
+    }
+}
