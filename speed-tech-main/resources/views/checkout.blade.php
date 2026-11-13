@@ -34,7 +34,7 @@
         $methodInfo = [
           'cod' => ['Cash on delivery', 'Pay the courier in cash when your order arrives.', 'truck'],
           'bank_transfer' => ['Bank transfer', 'Transfer to our bank account. We dispatch once the payment is received.', 'tag'],
-          'pay_at_store' => ['Pay at the office', 'Cash or card when you collect from our Nugawela office.', 'pin'],
+          'pay_at_store' => ['Pay at the office', 'Cash or card when you collect from our Kandy office.', 'pin'],
         ];
       @endphp
 
@@ -64,7 +64,7 @@
             <textarea name="installation_address" maxlength="500" rows="2" placeholder="Enter the property address and area where the cameras will be installed">{{ old('installation_address') }}</textarea>
             @error('installation_address')<span class="field-error">{{ $message }}</span>@enderror
           </label>
-          <p class="installation-note">The installation fee depends on the distance from our Nugawela office to your location. We’ll contact you with a separate quote before scheduling. This fee is not included in the order total.</p>
+          <p class="installation-note">The installation fee depends on the distance from our Kandy office to your location. We’ll contact you with a separate quote before scheduling. This fee is not included in the order total.</p>
         </div>
       </fieldset>
 

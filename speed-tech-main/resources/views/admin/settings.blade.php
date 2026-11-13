@@ -21,7 +21,7 @@
         <label class="pay-toggle">
           <input type="hidden" name="payment_pay_at_store_enabled" value="0">
           <input type="checkbox" name="payment_pay_at_store_enabled" value="1" @checked($v('payment_pay_at_store_enabled'))>
-          <span><b>Pay at the office</b><small>Cash or card when collecting in Nugawela. Pickup orders only.</small></span>
+          <span><b>Pay at the office</b><small>Cash or card when collecting from the Kandy office. Pickup orders only.</small></span>
         </label>
       </div>
       <label class="field" style="margin-top:16px;max-width:320px">Cash on delivery limit (Rs.) <small>— hide COD for orders above this; 0 = no limit</small>

@@ -490,7 +490,7 @@
   <section class="benefit-strip" aria-label="Why buy from Last Solution">
     <div class="wrap benefit-grid">
       <div><span><svg class="icon"><use href="#icon-check"/></svg></span><p><b>Right solution, first time</b>We discuss your needs before quoting</p></div>
-      <div><span><svg class="icon"><use href="#icon-truck"/></svg></span><p><b>Delivery or collection</b>Or collect from Nugawela, Kandy</p></div>
+      <div><span><svg class="icon"><use href="#icon-truck"/></svg></span><p><b>Delivery or collection</b>Or collect from our Kandy office</p></div>
       <div><span><svg class="icon"><use href="#icon-shield"/></svg></span><p><b>Trusted brands</b>{{ implode(', ', array_slice(config('shop.brands'), 0, 3)) }} and more</p></div>
       <div><span><svg class="icon"><use href="#icon-wrench"/></svg></span><p><b>Expert installation</b>We can install it for you</p></div>
     </div>

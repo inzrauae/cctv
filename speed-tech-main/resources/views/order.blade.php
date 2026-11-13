@@ -24,7 +24,7 @@
           <div class="installation-confirmation">
             <b>With installation</b>
             <span>{{ $order->installation_address }}</span>
-            <p>The installation fee depends on the distance from our Nugawela office to your location. We’ll contact you with a separate quote before scheduling. It is not included in this order total.</p>
+            <p>The installation fee depends on the distance from our Kandy office to your location. We’ll contact you with a separate quote before scheduling. It is not included in this order total.</p>
           </div>
         @endif
       </div>

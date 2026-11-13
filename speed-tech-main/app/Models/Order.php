@@ -17,7 +17,7 @@ class Order extends Model
     ];
 
     public const FULFILMENT = [
-        'pickup' => 'Collect from our Nugawela office',
+        'pickup' => 'Collect from our Kandy office',
         'delivery' => 'Island-wide delivery',
     ];
 

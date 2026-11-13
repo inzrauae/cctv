@@ -22,7 +22,7 @@ class ShopNotifier
             "Order: {$order->number}",
             "Customer: {$order->customer_name}, {$order->phone}".($order->email ? ", {$order->email}" : ''),
             "Fulfilment: {$order->fulfilmentLabel()}".($order->address ? " – {$order->address}, {$order->city}" : ''),
-            $order->installation_requested ? "Installation: With installation – {$order->installation_address} (quote based on distance from Nugawela; not included in order total)" : 'Installation: Not requested',
+            $order->installation_requested ? "Installation: With installation – {$order->installation_address} (quote based on distance from our Kandy office; not included in order total)" : 'Installation: Not requested',
             "Payment: {$order->paymentLabel()} ({$order->paymentStatusLabel()})",
             '',
             ...$lines,

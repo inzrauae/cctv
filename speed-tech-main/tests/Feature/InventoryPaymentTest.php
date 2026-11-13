@@ -149,7 +149,7 @@ class InventoryPaymentTest extends TestCase
         $this->post('/cart/items', ['product_id' => $this->ssd->id, 'quantity' => 1]);
         $this->get('/checkout')->assertOk()
             ->assertSee('With installation')
-            ->assertSee('fee depends on the distance from our Nugawela office to your location')
+            ->assertSee('fee depends on the distance from our Kandy office to your location')
             ->assertSee('not included in the order total');
 
         $details = [

@@ -40,7 +40,7 @@
         <a class="button button-outline" target="_blank" rel="noopener" href="{{ whatsapp_url("Hi Last Solution, I'm interested in {$product->name}".($product->oem_part_number ? " (model {$product->oem_part_number})" : '').'. '.$product->url()) }}"><svg class="icon"><use href="#icon-whatsapp"/></svg>Ask on WhatsApp</a>
         <ul class="assurances">
           <li><svg class="icon"><use href="#icon-shield"/></svg>{{ $product->warranty ? $product->warranty.' warranty' : 'Warranty confirmed on enquiry' }}</li>
-          <li><svg class="icon"><use href="#icon-truck"/></svg>Island-wide delivery or collect in Nugawela</li>
+          <li><svg class="icon"><use href="#icon-truck"/></svg>Island-wide delivery or collect from our Kandy office</li>
           <li><svg class="icon"><use href="#icon-wrench"/></svg>Installation available. The installation cost depends on the distance to your location and is quoted separately.</li>
         </ul>
       </div>
