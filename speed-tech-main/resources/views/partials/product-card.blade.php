@@ -15,6 +15,7 @@
         <span class="price-stack"><b class="product-price">{{ $product->priceLabel() }}</b>@if ($product->hasOffer())<s class="price-was">{{ money($product->price) }}</s>@endif</span>
         @if ($product->stockLabel())<span class="stock stock-{{ $product->stockState() }}">{{ $product->stockLabel() }}</span>@endif
       </div>
+      @if ($product->price !== null)<p class="install-note"><svg class="icon"><use href="#icon-wrench"/></svg>Installation cost depends on distance</p>@endif
       @if ($product->isPurchasable())
         <form action="{{ route('cart.add') }}" method="post" class="js-add-to-cart">
           @csrf

@@ -30,7 +30,7 @@ class OrderPlacer
             $items = [];
             foreach ($lines as $line) {
                 $product = $products->get($line['product']->id);
-                if (! $product || ! $product->isPurchasable() || $product->stock_qty < $line['quantity']) {
+                if (! $product || ! $product->isPurchasable() || ($product->tracksStock() && $product->stock_qty < $line['quantity'])) {
                     throw ValidationException::withMessages([
                         'cart' => "Sorry, “{$line['product']->name}” is no longer available in that quantity. Please review your cart.",
                     ]);
@@ -45,6 +45,7 @@ class OrderPlacer
                     'unit_price' => $product->sellingPrice(),
                     'quantity' => $line['quantity'],
                     'line_total' => $lineTotal,
+                    'stock_reserved' => $product->tracksStock(),
                 ];
             }
 
@@ -75,7 +76,7 @@ class OrderPlacer
             ]);
             $order->items()->createMany($items);
 
-            foreach ($items as $item) {
+            foreach (array_filter($items, fn ($item) => $item['stock_reserved']) as $item) {
                 Inventory::move($item['product_id'], -$item['quantity'], 'sale', ['reference' => $order->number, 'user_id' => null]);
             }
 
@@ -96,7 +97,7 @@ class OrderPlacer
             $nowHolding = $order->holdsStock();
 
             if ($wasHolding !== $nowHolding) {
-                foreach ($order->items()->whereNotNull('product_id')->get() as $item) {
+                foreach ($order->items()->whereNotNull('product_id')->where('stock_reserved', true)->get() as $item) {
                     if (! Product::whereKey($item->product_id)->exists()) {
                         continue;
                     }

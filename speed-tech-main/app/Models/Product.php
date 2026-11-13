@@ -149,14 +149,23 @@ class Product extends Model
     }
 
     /** Only priced, in-stock items can go into the cart; everything else is enquiry-only. */
+    /** Any active product with a price can be ordered, except one marked "Stock coming soon" with no stock. */
     public function isPurchasable(): bool
     {
-        return $this->is_active && $this->price !== null && $this->stock_qty > 0;
+        return $this->is_active && $this->price !== null && ($this->stock_qty > 0 || ! $this->restock_soon);
+    }
+
+    /** Stock is only counted (capped and reserved on orders) when the admin has entered a quantity. */
+    public function tracksStock(): bool
+    {
+        return $this->stock_qty > 0;
     }
 
     public function maxOrderQuantity(): int
     {
-        return max(0, min($this->stock_qty, (int) config('shop.max_line_quantity')));
+        $max = (int) config('shop.max_line_quantity');
+
+        return max(0, $this->tracksStock() ? min($this->stock_qty, $max) : $max);
     }
 
     public function priceLabel(): string

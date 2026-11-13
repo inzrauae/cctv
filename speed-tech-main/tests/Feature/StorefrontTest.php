@@ -187,16 +187,18 @@ class StorefrontTest extends TestCase
         $this->get('/cart')->assertSee('Your cart is empty');
     }
 
-    public function test_checkout_rejects_when_stock_ran_out(): void
+    public function test_checkout_caps_quantity_at_the_counted_stock(): void
     {
-        $this->post('/cart/items', ['product_id' => $this->display->id]);
-        $this->display->update(['stock_qty' => 0]);
+        $this->display->update(['stock_qty' => 5]);
+        $this->post('/cart/items', ['product_id' => $this->display->id, 'quantity' => 2]);
+        $this->display->update(['stock_qty' => 1]); // sold elsewhere meanwhile
 
         $this->post('/checkout', [
             'customer_name' => 'A', 'phone' => '0771234567', 'fulfilment' => 'pickup', 'payment_method' => 'pay_at_store',
         ]);
 
-        $this->assertSame(0, Order::count());
+        $this->assertSame(1, Order::sole()->items()->sole()->quantity);
+        $this->assertSame(0, $this->display->fresh()->stock_qty);
     }
 
     public function test_delivery_requires_address(): void

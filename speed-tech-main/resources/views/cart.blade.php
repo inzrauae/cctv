@@ -48,6 +48,7 @@
         </dl>
         <a class="button red full" href="{{ route('checkout') }}">Proceed to checkout<svg class="icon"><use href="#icon-arrow"/></svg></a>
         <a class="text-link" href="{{ route('shop') }}">Continue shopping</a>
+        <p class="install-note"><svg class="icon"><use href="#icon-wrench"/></svg>Need installation? Choose it at checkout. The installation cost depends on the distance to your location and is quoted separately.</p>
         <p class="detail-note">Collect free from our Nugawela office, or island-wide delivery. {{ delivery_text() }}</p>
       </aside>
     @endif
