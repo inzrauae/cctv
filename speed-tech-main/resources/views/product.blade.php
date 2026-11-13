@@ -11,7 +11,7 @@
   </div>
 
   <section class="wrap product-page">
-    <div class="product-gallery"><img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" width="640" height="480"></div>
+    <div class="product-gallery"><img src="{{ $product->imageUrl() }}" {{ responsive_img($product->image, '(max-width:1000px) 100vw, 640px') }} alt="{{ $product->name }}" width="640" height="480"></div>
 
     <div class="product-summary">
       <div class="eyebrow brand-text">{{ strtoupper($product->groupLabel()) }}@if ($product->brand) · {{ strtoupper($product->brand) }}@endif @if ($product->hasOffer()) · <a class="offer-link" href="{{ route('offers') }}">SPECIAL OFFER</a>@endif</div>

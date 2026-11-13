@@ -34,3 +34,20 @@ if (! function_exists('delivery_text')) {
         return 'Delivery is '.money($fee).($freeOver > 0 ? ' and free on orders over '.money($freeOver) : '').'.';
     }
 }
+
+if (! function_exists('responsive_img')) {
+    /**
+     * srcset + sizes attributes for an image in public/ that has smaller WebP copies
+     * (made by `php artisan images:variants`). Without copies it is just the file itself.
+     */
+    function responsive_img(?string $path, string $sizes): \Illuminate\Support\HtmlString
+    {
+        $srcset = \App\Services\ImageVariants::srcset($path);
+        if ($srcset === '') {
+            // No smaller copies: point srcset at the file itself (needed on <source> tags).
+            return new \Illuminate\Support\HtmlString($path ? 'srcset="'.e(str_contains($path, '://') ? $path : asset($path)).'"' : '');
+        }
+
+        return new \Illuminate\Support\HtmlString('srcset="'.e($srcset).'" sizes="'.e($sizes).'"');
+    }
+}

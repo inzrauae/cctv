@@ -1,7 +1,7 @@
 {{-- $product --}}
 <article class="product">
   <a href="{{ $product->url() }}" aria-label="View {{ $product->name }}" @class(['product-image', 'is-contain'])>
-    <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" loading="lazy" width="480" height="360">
+    <img src="{{ $product->imageUrl() }}" {{ responsive_img($product->image, '(max-width:700px) 50vw, (max-width:1200px) 33vw, 300px') }} alt="{{ $product->name }}" loading="lazy" width="480" height="360">
     @if ($product->tag)<span class="product-label">{{ $product->tag }}</span>@endif
     @if ($product->hasOffer())<span class="offer-badge">-{{ $product->discountPercent() }}%</span>@endif
   </a>

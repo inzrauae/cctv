@@ -134,3 +134,38 @@ body{font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLe
   .photo-page-hero .page-hero-inner{min-height:340px;padding-block:24px 40px}
   .photo-page-hero h1,.photo-page-hero .page-hero-inner>p{text-shadow:0 2px 14px #071a34}
 }
+
+/* ---- Phones: bigger tap targets, readable text, shorter page ---- */
+@media(max-width:700px){
+  /* small text links get a ~40px tall hit area without moving the layout */
+  .text-link,.panel-more,.slide-details,.footer-more,.review-link{min-height:40px;display:inline-flex;align-items:center}
+  .topbar a{min-height:32px;display:inline-flex;align-items:center}
+  .footer-links>a,.footer-phones a{min-height:40px;display:flex;align-items:center}
+  .tabs-bar button{min-height:40px}
+  label.check{min-height:40px;display:flex;align-items:center}
+
+  /* body copy that was 11–12px */
+  .tip-card p,.product-body>p{font-size:13px}
+  .benefit-row span{font-size:12px}
+
+  /* tips: one swipeable row instead of four full-width cards */
+  .tip-grid,.hint-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:-18px;padding:0 18px 6px;scroll-padding-inline:18px}
+  .tip-grid::-webkit-scrollbar,.hint-grid::-webkit-scrollbar{display:none}
+  .tip-card,.hint-card{scroll-snap-align:start}
+
+  /* dialogs: keep scrolling inside the form and clear the iPhone home bar */
+  dialog{overscroll-behavior:contain;padding-bottom:calc(26px + env(safe-area-inset-bottom))}
+}
+/* no hover-only feedback lag on touch screens */
+a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* ---- Footer: no empty column, no white strip under it on phones ---- */
+@media(min-width:1201px){.footer-top{grid-template-columns:1.5fr repeat(3,1fr);gap:40px}}
+.footer-contact>a{align-items:flex-start}
+@media(max-width:700px){
+  .footer-contact{grid-column:1 / -1}
+  .footer-links>a{min-height:36px}
+  /* the fixed Call/WhatsApp bar sits over the footer's own dark background */
+  body{padding-bottom:0}
+  footer{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+}

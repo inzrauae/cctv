@@ -10,7 +10,7 @@
     <div class="hero-media" aria-hidden="true">
       @foreach ($slides as $i => $slide)
         <picture class="hero-slide {{ $i === 0 ? 'is-active' : '' }}" data-slide>
-          <source srcset="{{ asset('assets/hero/'.$slide[0].'.webp') }}" type="image/webp">
+          <source {{ responsive_img('assets/hero/'.$slide[0].'.webp', '100vw') }} type="image/webp">
           <img src="{{ asset('assets/hero/'.$slide[0].'.jpg') }}" alt="" width="1600" height="1067" style="object-position:{{ $slide[1] }}" @if ($i === 0) fetchpriority="high" @else loading="lazy" @endif>
         </picture>
       @endforeach
@@ -272,7 +272,7 @@
           @php($group = $groupInfo[$service['group'] ?? ''] ?? null)
           <article class="service-slide tone-{{ $service['group'] ?? 'security' }}" data-group="{{ $service['group'] ?? '' }}" aria-label="{{ $service['name'] }}">
             @if (! empty($service['image']))
-              <picture class="slide-photo" aria-hidden="true"><source srcset="{{ asset('assets/hero/'.$service['image'].'.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
+              <picture class="slide-photo" aria-hidden="true"><source {{ responsive_img('assets/hero/'.$service['image'].'.webp', '(max-width:700px) 90vw, 420px') }} type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
             @endif
             <div class="slide-shade" aria-hidden="true"></div>
             @if ($group)<span class="slide-tag">{{ $group[0] }}</span>@endif
@@ -385,7 +385,7 @@
   {{-- Promo · why choose · not sure --}}
   <section class="wrap ref-trio">
     <div class="ref-promo">
-      <picture aria-hidden="true"><source srcset="{{ asset('assets/hero/network-switch.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/network-switch.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
+      <picture aria-hidden="true"><source {{ responsive_img('assets/hero/network-switch.webp', '(max-width:700px) 100vw, 50vw') }} type="image/webp"><img src="{{ asset('assets/hero/network-switch.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
       <div class="ref-promo-body">
         <div class="eyebrow">INSTALL · REPAIR · SERVICE</div>
         <h2>System not working?<br>Let's get it sorted.</h2>

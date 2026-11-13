@@ -83,14 +83,14 @@
                 <span class="phone-live">LIVE</span>
               </div>
               <div class="phone-feed">
-                <picture><source srcset="{{ asset('assets/hero/cctv-bullet-cameras.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/cctv-bullet-cameras.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
+                <picture><source {{ responsive_img('assets/hero/cctv-bullet-cameras.webp', '(max-width:700px) 100vw, 50vw') }} type="image/webp"><img src="{{ asset('assets/hero/cctv-bullet-cameras.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture>
                 <span class="feed-tag"><i></i>CAM 01 · GATE</span>
                 <span class="feed-time" data-mv-clock>--:--:--</span>
               </div>
               <div class="phone-grid">
-                <div class="mini"><picture><source srcset="{{ asset('assets/hero/cctv-dome-hikvision.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/cctv-dome-hikvision.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 02</span></div>
-                <div class="mini"><picture><source srcset="{{ asset('assets/hero/cctv-dome-outdoor.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/cctv-dome-outdoor.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 03</span></div>
-                <div class="mini night"><picture><source srcset="{{ asset('assets/hero/cctv-bullet-cameras.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/cctv-bullet-cameras.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 04 · IR</span></div>
+                <div class="mini"><picture><source {{ responsive_img('assets/hero/cctv-dome-hikvision.webp', '(max-width:700px) 33vw, 220px') }} type="image/webp"><img src="{{ asset('assets/hero/cctv-dome-hikvision.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 02</span></div>
+                <div class="mini"><picture><source {{ responsive_img('assets/hero/cctv-dome-outdoor.webp', '(max-width:700px) 33vw, 220px') }} type="image/webp"><img src="{{ asset('assets/hero/cctv-dome-outdoor.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 03</span></div>
+                <div class="mini night"><picture><source {{ responsive_img('assets/hero/cctv-bullet-cameras.webp', '(max-width:700px) 33vw, 220px') }} type="image/webp"><img src="{{ asset('assets/hero/cctv-bullet-cameras.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture><span>CAM 04 · IR</span></div>
                 <div class="mini add"><svg class="icon"><use href="#icon-plus"/></svg><span>Add</span></div>
               </div>
               <div class="timeline">

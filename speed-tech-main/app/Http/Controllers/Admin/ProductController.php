@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\ImageVariants;
 use App\Services\Inventory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -134,6 +135,7 @@ class ProductController extends Controller
             File::ensureDirectoryExists(public_path(self::UPLOAD_DIR));
             $file->move(public_path(self::UPLOAD_DIR), $name);
             $product->image = self::UPLOAD_DIR.'/'.$name;
+            ImageVariants::generate($product->image); // small copies for phones
         }
 
         $product->save();
@@ -155,6 +157,7 @@ class ProductController extends Controller
     {
         if ($path && str_starts_with($path, self::UPLOAD_DIR.'/')) {
             File::delete(public_path($path));
+            ImageVariants::delete($path);
         }
     }
 }

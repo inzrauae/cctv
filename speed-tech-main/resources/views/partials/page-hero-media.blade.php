@@ -2,7 +2,7 @@
 <div class="hero-media" aria-hidden="true" data-page-hero>
   @foreach ($images as $image => $position)
     <picture class="hero-slide {{ $loop->first ? 'is-active' : '' }}" data-slide>
-      <source srcset="{{ asset('assets/hero/'.$image.'.webp') }}" type="image/webp">
+      <source {{ responsive_img('assets/hero/'.$image.'.webp', '100vw') }} type="image/webp">
       <img src="{{ asset('assets/hero/'.$image.'.jpg') }}" alt="" width="1600" height="1067" style="object-position:{{ $position }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
     </picture>
   @endforeach

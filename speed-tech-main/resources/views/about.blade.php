@@ -26,7 +26,7 @@
         <a class="button button-outline" href="{{ route('contact') }}">Contact our team</a>
       </div>
     </div>
-    <img src="{{ asset('assets/last-solution-facebook.jpg') }}" alt="Last Solution logo: Leader in Video Surveillance" loading="lazy" width="720" height="720">
+    <img src="{{ asset('assets/last-solution-facebook.jpg') }}" {{ responsive_img('assets/last-solution-facebook.jpg', '(max-width:700px) 100vw, 400px') }} alt="Last Solution logo: Leader in Video Surveillance" loading="lazy" width="720" height="720">
   </section>
 
   <section class="wrap about-offer" aria-labelledby="offer-title">

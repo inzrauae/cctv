@@ -206,3 +206,17 @@ document.querySelectorAll('[data-page-hero]').forEach((media) => {
     slides[i].classList.add('is-active');
   }, 6000);
 });
+
+// Contact map: load the Google embed straight away on larger screens, on tap on phones.
+document.querySelectorAll('[data-map]').forEach((card) => {
+  const load = () => {
+    const frame = Object.assign(document.createElement('iframe'), {
+      src: card.dataset.map, title: 'Map showing Last Solution in Nugawela, Kandy', loading: 'lazy', referrerPolicy: 'no-referrer-when-downgrade', allowFullscreen: true,
+    });
+    card.replaceChildren(frame);
+  };
+  const button = card.querySelector('.map-load');
+  if (window.matchMedia('(min-width: 701px)').matches || !button) return load();
+  button.hidden = false;
+  button.addEventListener('click', load, { once: true });
+});

@@ -3,13 +3,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#071a34">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script>document.documentElement.classList.add('js')</script>
   <title>{{ isset($title) ? $title.' | '.$shop['name'] : $shop['name'].' | CCTV & Security Solutions in Kandy' }}</title>
   <meta name="description" content="{{ $description ?? 'CCTV, alarm systems, smart door locks, intercoms, networking, Wi-Fi and smart home devices, plus A/C and appliance repair, solar power and battery backup. Last Solution (Pvt) Ltd, Nugawela, Kandy. Hikvision, EZVIZ, Dahua, Imou, TP-Link and UNV.' }}">
   <link rel="icon" href="{{ asset('assets/favicon.png') }}" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{{ asset('style.css') }}?v={{ filemtime(public_path('style.css')) }}">
   <link rel="stylesheet" href="{{ asset('shop.css') }}?v={{ filemtime(public_path('shop.css')) }}">
   <link rel="stylesheet" href="{{ asset('pages.css') }}?v={{ filemtime(public_path('pages.css')) }}">
@@ -29,7 +32,7 @@
   </div><div class="top-right"><span class="top-tagline">CCTV · Security · Smart home · A/C · Solar</span>@include('partials.social', ['class' => 'social-top'])</div></div></div>
 
   <header class="masthead"><div class="wrap header">
-    <a class="brand" href="{{ route('home') }}" aria-label="{{ $shop['name'] }} home"><img class="logo" src="{{ asset('assets/last-solution-logo.png') }}" width="538" height="314" alt="Last Solution"></a>
+    <a class="brand" href="{{ route('home') }}" aria-label="{{ $shop['name'] }} home"><img class="logo" src="{{ asset('assets/last-solution-logo.png') }}" {{ responsive_img('assets/last-solution-logo.png', '(max-width:700px) 100px, 130px') }} width="538" height="314" alt="Last Solution"></a>
     <form class="search" action="{{ route('shop') }}" method="get" role="search">
       <input name="q" type="search" value="{{ request()->routeIs('shop') ? request('q') : '' }}" aria-label="Search products" placeholder="Search cameras, locks, routers and more…" autocomplete="off" maxlength="100">
       <button type="submit" aria-label="Search"><svg class="icon"><use href="#icon-search"/></svg></button>
@@ -74,7 +77,7 @@
 
     <div class="wrap footer-top">
       <div class="footer-brand">
-        <a href="{{ route('home') }}" aria-label="{{ $shop['name'] }} home"><img src="{{ asset('assets/last-solution-logo-light.png') }}" width="538" height="314" alt="Last Solution"></a>
+        <a href="{{ route('home') }}" aria-label="{{ $shop['name'] }} home"><img src="{{ asset('assets/last-solution-logo-light.png') }}" {{ responsive_img('assets/last-solution-logo-light.png', '220px') }} loading="lazy" width="538" height="314" alt="Last Solution"></a>
         <p class="footer-tagline">CCTV <span>•</span> Security <span>•</span> Service</p>
         <p class="footer-about">CCTV, alarms, smart locks, intercoms, networking and smart home, plus A/C and appliance repair, solar power and battery backup. Based in Nugawela, Kandy.</p>
         @include('partials.social', ['class' => 'social-footer'])
@@ -93,7 +96,8 @@
       </div>
       <div class="footer-links footer-contact" id="contact"><h2>Contact us</h2>
         <a class="footer-hotline" href="tel:{{ $shop['phone'] }}"><svg class="icon"><use href="#icon-phone"/></svg><span><small>Hotline</small>{{ $shop['phone_display'] }}</span></a>
-        <div class="footer-phones">@foreach ($shop['other_phones'] as [$display, $dial])<a href="tel:{{ $dial }}">{{ $display }}</a>@endforeach</div>
+        @if ($shop['other_phones'])<div class="footer-phones">@foreach ($shop['other_phones'] as [$display, $dial])<a href="tel:{{ $dial }}">{{ $display }}</a>@endforeach</div>@endif
+        <a href="{{ whatsapp_url('Hi Last Solution, I would like to ask about your services.') }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-whatsapp"/></svg>Chat on WhatsApp</a>
         @if ($shop['email'])<a href="mailto:{{ $shop['email'] }}"><svg class="icon"><use href="#icon-mail"/></svg>{{ $shop['email'] }}</a>@endif
         <a href="{{ $shop['maps_url'] }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-pin"/></svg>{{ $shop['address'] }}</a>
       </div>

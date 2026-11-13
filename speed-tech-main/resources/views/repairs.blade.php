@@ -42,7 +42,7 @@
       @foreach ($groupServices as $service)
         <article class="service-card" id="{{ $service['slug'] }}">
           @if (! empty($service['image']))
-            <a class="service-card-photo" href="{{ route('repairs.show', $service['slug']) }}" tabindex="-1" aria-hidden="true"><picture><source srcset="{{ asset('assets/hero/'.$service['image'].'.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture></a>
+            <a class="service-card-photo" href="{{ route('repairs.show', $service['slug']) }}" tabindex="-1" aria-hidden="true"><picture><source {{ responsive_img('assets/hero/'.$service['image'].'.webp', '(max-width:700px) 100vw, (max-width:1200px) 50vw, 33vw') }} type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" loading="lazy" width="1600" height="1067"></picture></a>
           @endif
           <div class="service-card-head">
             <span class="service-icon"><svg class="icon"><use href="#icon-{{ $service['icon'] }}"/></svg></span>

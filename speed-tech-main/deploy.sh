@@ -68,6 +68,9 @@ if [ "$($PHP artisan tinker --execute='echo \App\Models\User::where("is_admin", 
   $PHP artisan db:seed --class=CatalogStructureSeeder --force
 fi
 
+echo "==> Small image copies for phones"
+$PHP artisan images:variants || true   # only makes missing ones; never fails the deploy
+
 echo "==> Refreshing caches"
 $PHP artisan config:cache
 $PHP artisan route:cache

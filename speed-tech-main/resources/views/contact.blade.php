@@ -52,8 +52,10 @@
     </div>
 
     <div class="contact-side">
-      <div class="map-card">
-        <iframe src="{{ $shop['maps_embed'] }}" title="Map showing Last Solution in Nugawela, Kandy" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      {{-- The Google map is ~1.7 MB of scripts, so phones load it only when tapped (app.js). --}}
+      <div class="map-card" data-map="{{ $shop['maps_embed'] }}">
+        <noscript><iframe src="{{ $shop['maps_embed'] }}" title="Map showing Last Solution in Nugawela, Kandy" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></noscript>
+        <button class="map-load" type="button" hidden><svg class="icon"><use href="#icon-pin"/></svg><span><b>Show map</b><small>Nugawela, Kandy</small></span></button>
       </div>
       <div class="form-card visit-card">
         <h2>Visit Last Solution</h2>

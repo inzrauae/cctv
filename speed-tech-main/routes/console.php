@@ -3,9 +3,11 @@
 use App\Models\Enquiry;
 use App\Models\Order;
 use App\Models\Product;
+use App\Services\ImageVariants;
 use App\Services\SkuGenerator;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 Artisan::command('inspire', function () {
@@ -54,3 +56,20 @@ Artisan::command('products:codes {--all : Replace every existing code, not just 
     $this->table(['Code', 'OEM P/N', 'Product'], $rows);
     $this->info(count($rows).' product codes generated.');
 })->purpose('Generate product codes (SKUs) like LCD-00012 for products that have none');
+
+Artisan::command('images:variants {--force : Rebuild variants that already exist}', function () {
+    // Hero photos: built from the .webp (the .jpg is only a fallback src).
+    // Products, uploads and logos: built from whatever format the file is in.
+    $files = collect()
+        ->merge(File::glob(public_path('assets/hero/*.webp')))
+        ->merge(File::glob(public_path('assets/products/*.{jpg,jpeg,png,webp}'), GLOB_BRACE))
+        ->merge(File::glob(public_path('uploads/products/*.{jpg,jpeg,png,webp}'), GLOB_BRACE))
+        ->merge([public_path('assets/last-solution-logo.png'), public_path('assets/last-solution-logo-light.png'), public_path('assets/last-solution-facebook.jpg')])
+        ->reject(fn ($path) => ImageVariants::isVariant($path));
+
+    $written = 0;
+    foreach ($files as $path) {
+        $written += ImageVariants::generate(ltrim(str_replace(DIRECTORY_SEPARATOR, '/', Str::after($path, public_path())), '/'), (bool) $this->option('force'));
+    }
+    $this->info("Checked {$files->count()} images, wrote {$written} smaller copies.");
+})->purpose('Create small WebP copies of hero, product and logo images for phones');

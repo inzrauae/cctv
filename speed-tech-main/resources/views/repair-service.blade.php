@@ -6,7 +6,7 @@
 @section('content')
   <section class="repair-hero service-hero">
     @if (! empty($service['image']))
-      <div class="service-hero-photo" aria-hidden="true"><picture><source srcset="{{ asset('assets/hero/'.$service['image'].'.webp') }}" type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" fetchpriority="high" width="1600" height="1067"></picture></div>
+      <div class="service-hero-photo" aria-hidden="true"><picture><source {{ responsive_img('assets/hero/'.$service['image'].'.webp', '100vw') }} type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" fetchpriority="high" width="1600" height="1067"></picture></div>
     @endif
     <div class="wrap repair-hero-inner">
       <div>

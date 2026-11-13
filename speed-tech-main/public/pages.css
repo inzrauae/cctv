@@ -176,3 +176,6 @@
 .phone-list .phone-hotline{grid-column:1 / -1;background:#ed171f0a;border-color:#ed171f40}.phone-list .phone-hotline span{font-size:15px}
 .phone-list small{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--red)}
 @media(max-width:700px){.phone-list{grid-template-columns:1fr}}
+.map-load{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;border:0;cursor:pointer;color:var(--ink);background:linear-gradient(135deg,#e9eef5 25%,transparent 25%) 0 0/24px 24px,linear-gradient(225deg,#e9eef5 25%,transparent 25%) 0 0/24px 24px,#f4f7fb}
+.map-load .icon{width:44px;height:44px;padding:11px;border-radius:50%;background:var(--red);color:#fff;box-shadow:0 6px 18px #ed171f40}
+.map-load span{display:flex;flex-direction:column;align-items:center;gap:2px}.map-load b{font-size:16px}.map-load small{font-size:12px;color:var(--muted)}

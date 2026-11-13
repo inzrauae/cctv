@@ -19,7 +19,7 @@
         @foreach ($lines as $line)
           @php($product = $line['product'])
           <div class="cart-line">
-            <a class="part-thumb" href="{{ $product->url() }}"><img src="{{ $product->imageUrl() }}" alt="" width="96" height="72"></a>
+            <a class="part-thumb" href="{{ $product->url() }}"><img src="{{ $product->imageUrl() }}" {{ responsive_img($product->image, '96px') }} alt="" width="96" height="72"></a>
             <div class="cart-info">
               <a href="{{ $product->url() }}"><b>{{ $product->name }}</b></a>
               <small>{{ $product->groupLabel() }}@if ($product->oem_part_number) · Model {{ $product->oem_part_number }}@endif</small>
