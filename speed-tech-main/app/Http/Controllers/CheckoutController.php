@@ -44,6 +44,11 @@ class CheckoutController extends Controller
 
     public function store(Request $request, OrderPlacer $placer): RedirectResponse
     {
+        // Installation is only offered with delivery; pickup customers collect the items themselves.
+        if ($request->input('fulfilment') === 'pickup') {
+            $request->merge(['installation_requested' => '0', 'installation_address' => null]);
+        }
+
         $data = $request->validate([
             'customer_name' => ['required', 'string', 'max:100'],
             'phone' => ['required', 'string', 'regex:/^\+?[0-9\s\-]{9,20}$/'],

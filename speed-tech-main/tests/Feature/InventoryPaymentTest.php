@@ -144,6 +144,20 @@ class InventoryPaymentTest extends TestCase
         $this->assertEquals(600, (float) Order::first()->delivery_fee);
     }
 
+    public function test_pickup_orders_never_include_installation(): void
+    {
+        $this->get('/cart')->assertOk(); // start a session
+        $this->checkout([
+            'fulfilment' => 'pickup', 'payment_method' => 'pay_at_store',
+            'installation_requested' => '1', // sent anyway, e.g. a stale form
+        ], qty: 1)->assertRedirect();
+
+        $order = Order::firstOrFail();
+        $this->assertSame('pickup', $order->fulfilment);
+        $this->assertFalse($order->installation_requested);
+        $this->assertNull($order->installation_address);
+    }
+
     public function test_installation_is_optional_and_quoted_separately_by_location(): void
     {
         $this->post('/cart/items', ['product_id' => $this->ssd->id, 'quantity' => 1]);

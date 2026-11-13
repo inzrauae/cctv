@@ -181,6 +181,13 @@ if (checkout) {
     const bank = $('[data-bank-details]', checkout);
     if (bank) bank.hidden = checkout.elements.payment_method.value !== 'bank_transfer';
 
+    // Installation is only offered with delivery, not when collecting from the office.
+    const addon = $('[data-installation-addon]', checkout);
+    if (addon) {
+      addon.hidden = !delivery;
+      if (!delivery) checkout.elements.installation_requested.checked = false;
+    }
+
     const installation = $('[data-installation-fields]', checkout);
     if (installation) {
       const requested = checkout.elements.installation_requested.checked;

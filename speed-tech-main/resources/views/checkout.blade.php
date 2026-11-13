@@ -53,7 +53,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="form-card installation-addon">
+      <fieldset class="form-card installation-addon" data-installation-addon>
         <legend>Optional add-on</legend>
         <label class="option-card installation-choice">
           <input type="checkbox" name="installation_requested" value="1" @checked(old('installation_requested')) aria-controls="installation-fields">
