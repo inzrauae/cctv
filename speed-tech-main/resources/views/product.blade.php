@@ -22,7 +22,7 @@
         <div class="price-row">
           <b class="price-big">{{ $product->priceLabel() }}</b>
           @if ($product->hasOffer())<s class="was">{{ money($product->price) }}</s><span class="offer-pill">-{{ $product->discountPercent() }}%</span>@endif
-          @if ($product->price !== null)<span class="stock stock-{{ $product->stockState() }}">{{ $product->stockLabel() }}</span>@endif
+          @if ($product->stockLabel())<span class="stock stock-{{ $product->stockState() }}">{{ $product->stockLabel() }}</span>@endif
         </div>
         @if ($product->hasOffer())
           <p class="offer-note"><svg class="icon"><use href="#icon-tag"/></svg>You save {{ money($product->savings()) }}@if ($product->offer_ends_at) · offer ends {{ $product->offer_ends_at->format('j M Y') }}@endif</p>
@@ -35,7 +35,7 @@
             <button class="button red" type="submit"><svg class="icon"><use href="#icon-cart"/></svg>Add to cart</button>
           </form>
         @else
-          <button class="button red" type="button" data-enquire="{{ $product->id }}" data-enquire-name="{{ $product->name }}">{{ $product->price === null ? 'Ask for price' : 'Check availability' }}<svg class="icon"><use href="#icon-arrow"/></svg></button>
+          <button class="button red" type="button" data-enquire="{{ $product->id }}" data-enquire-name="{{ $product->name }}">{{ $product->enquiryLabel() }}<svg class="icon"><use href="#icon-arrow"/></svg></button>
         @endif
         <a class="button button-outline" target="_blank" rel="noopener" href="{{ whatsapp_url("Hi Last Solution, I'm interested in {$product->name}".($product->oem_part_number ? " (model {$product->oem_part_number})" : '').'. '.$product->url()) }}"><svg class="icon"><use href="#icon-whatsapp"/></svg>Ask on WhatsApp</a>
         <ul class="assurances">

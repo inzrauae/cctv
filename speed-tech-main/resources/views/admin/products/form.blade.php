@@ -67,6 +67,7 @@
             <label class="field">{{ $product->exists ? 'Stock quantity' : 'Opening stock' }} <small>— changes are logged in the stock history</small><input type="number" name="stock_qty" value="{{ old('stock_qty', $product->stock_qty ?? 0) }}" min="0" required></label>
             <label class="field">Reorder level <small>— warn me when stock is at or below</small><input type="number" name="reorder_level" value="{{ old('reorder_level', $product->reorder_level ?? 3) }}" min="0"></label>
           </div>
+          <input type="hidden" name="restock_soon" value="0"><label class="check" style="margin-top:12px"><input type="checkbox" name="restock_soon" value="1" @checked(old('restock_soon', $product->restock_soon))> Stock coming soon <small>— when stock is 0, show “Stock coming soon” instead of hiding the stock status</small></label>
           <p class="help" style="margin-top:12px">Customers can buy online only when there is a price and stock above 0. Otherwise they send an enquiry.</p>
           @if ($product->exists)
             <a class="link" href="{{ route('admin.inventory.index', ['q' => $product->sku ?: $product->name]) }}">Receive or adjust stock →</a>

@@ -19,7 +19,7 @@ class Product extends Model
     protected $fillable = [
         'category_id', 'name', 'brand', 'slug', 'sku', 'oem_part_number',
         'tag', 'summary', 'description', 'meta_title', 'meta_description', 'specification', 'connector_type', 'size',
-        'price', 'offer_price', 'offer_ends_at', 'cost_price', 'stock_qty', 'reorder_level', 'warranty', 'image', 'is_featured', 'is_active',
+        'price', 'offer_price', 'offer_ends_at', 'cost_price', 'stock_qty', 'restock_soon', 'reorder_level', 'warranty', 'image', 'is_featured', 'is_active',
     ];
 
     protected static function booted(): void
@@ -40,6 +40,7 @@ class Product extends Model
             'stock_qty' => 'integer',
             'reorder_level' => 'integer',
             'is_featured' => 'boolean',
+            'restock_soon' => 'boolean',
             'is_active' => 'boolean',
         ];
     }
@@ -163,21 +164,35 @@ class Product extends Model
         return $this->price === null ? 'Price on request' : money($this->sellingPrice());
     }
 
-    public function stockLabel(): string
+    /** Customer-facing stock text; null when out of stock with no restock planned (nothing is shown). */
+    public function stockLabel(): ?string
     {
-        return match (true) {
-            $this->stock_qty > self::LOW_STOCK => 'In stock',
-            $this->stock_qty > 0 => "Only {$this->stock_qty} left",
-            default => 'Available to order',
+        return match ($this->stockState()) {
+            'in' => 'In stock',
+            'low' => "Only {$this->stock_qty} left",
+            'soon' => 'Stock coming soon',
+            default => null,
         };
     }
 
+    /** in | low | soon (out of stock, restock on the way) | out */
     public function stockState(): string
     {
         return match (true) {
             $this->stock_qty > self::LOW_STOCK => 'in',
             $this->stock_qty > 0 => 'low',
+            (bool) $this->restock_soon => 'soon',
             default => 'out',
+        };
+    }
+
+    /** Text for the enquiry button when the product can't be bought online. */
+    public function enquiryLabel(): string
+    {
+        return match (true) {
+            $this->price === null => 'Ask for price',
+            $this->stockState() === 'soon' => 'Ask when it arrives',
+            default => 'Check availability',
         };
     }
 

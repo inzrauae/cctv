@@ -104,6 +104,7 @@ class ProductController extends Controller
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'remove_image' => ['nullable', 'boolean'],
             'is_featured' => ['nullable', 'boolean'],
+            'restock_soon' => ['nullable', 'boolean'],
             'is_active' => ['nullable', 'boolean'],
         ], [
             'category_id.required' => 'Choose a shop category.',
@@ -117,6 +118,7 @@ class ProductController extends Controller
         $product->reorder_level = (int) ($data['reorder_level'] ?? 3);
         $isNew = ! $product->exists;
         $product->is_featured = $request->boolean('is_featured');
+        $product->restock_soon = $request->boolean('restock_soon');
         $product->is_active = $request->boolean('is_active');
         if (blank($data['slug'] ?? null) && ! $product->exists) {
             $product->slug = null; // HasSlug fills it from the name

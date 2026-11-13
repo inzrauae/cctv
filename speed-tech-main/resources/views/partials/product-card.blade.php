@@ -13,7 +13,7 @@
     <div class="product-foot">
       <div class="price-row">
         <span class="price-stack"><b class="product-price">{{ $product->priceLabel() }}</b>@if ($product->hasOffer())<s class="price-was">{{ money($product->price) }}</s>@endif</span>
-        @if ($product->price !== null)<span class="stock stock-{{ $product->stockState() }}">{{ $product->stockLabel() }}</span>@endif
+        @if ($product->stockLabel())<span class="stock stock-{{ $product->stockState() }}">{{ $product->stockLabel() }}</span>@endif
       </div>
       @if ($product->isPurchasable())
         <form action="{{ route('cart.add') }}" method="post" class="js-add-to-cart">
@@ -23,7 +23,7 @@
         </form>
       @else
         <button class="add product-add is-enquiry" type="button" data-enquire="{{ $product->id }}" data-enquire-name="{{ $product->name }}">
-          <svg class="icon"><use href="#icon-whatsapp"/></svg><span>{{ $product->price === null ? 'Ask for price' : 'Check availability' }}</span>
+          <svg class="icon"><use href="#icon-whatsapp"/></svg><span>{{ $product->enquiryLabel() }}</span>
         </button>
       @endif
     </div>
