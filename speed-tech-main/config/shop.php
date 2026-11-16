@@ -172,10 +172,15 @@ return [
     'phone_display' => env('SHOP_PHONE_DISPLAY', '076 722 3260'),
     'other_phones' => [],
     'whatsapp' => env('SHOP_WHATSAPP', '94767223260'),
-    'email' => env('SHOP_EMAIL', ''),
+    'email' => env('SHOP_EMAIL') ?: 'info@lastsolution.lk', // an empty SHOP_EMAIL in .env still uses this
     'address' => env('SHOP_ADDRESS', 'No: 135/8 Ebulpuraya, Nugawela, Kandy, Sri Lanka'),
     'maps_url' => env('SHOP_MAPS_URL', 'https://www.google.com/maps/search/?api=1&query='.rawurlencode('No: 135/8 Ebulpuraya, Nugawela, Kandy')),
     'reviews_url' => '',
+    // For search engines (structured data): street, town, district and map position of the office.
+    'street' => 'No: 135/8 Ebulpuraya',
+    'locality' => 'Nugawela',
+    'region' => 'Kandy',
+    'geo' => [7.3342397, 80.5957728],
     'facebook_url' => env('SHOP_FACEBOOK_URL', 'https://www.facebook.com/LASTSOLUTION1/'),
     'tiktok_url' => env('SHOP_TIKTOK_URL', 'https://www.tiktok.com/@last_solution_pvt_ltd'),
     'maps_embed' => env('SHOP_MAPS_EMBED', 'https://maps.google.com/maps?q='.rawurlencode('No: 135/8 Ebulpuraya, Nugawela, Kandy, Sri Lanka').'&z=16&output=embed'),

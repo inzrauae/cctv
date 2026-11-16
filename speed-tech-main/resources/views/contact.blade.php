@@ -25,6 +25,10 @@
       <span class="service-icon"><svg class="icon"><use href="#icon-whatsapp"/></svg></span>
       <b>WhatsApp</b><span>Send a message or a photo</span>
     </a>
+    <a class="method-card" href="mailto:{{ $shop['email'] }}">
+      <span class="service-icon"><svg class="icon"><use href="#icon-mail"/></svg></span>
+      <b>Email</b><span>{{ $shop['email'] }}</span>
+    </a>
     <a class="method-card" href="{{ $shop['maps_url'] }}" target="_blank" rel="noopener">
       <span class="service-icon"><svg class="icon"><use href="#icon-pin"/></svg></span>
       <b>Find us</b><span>{{ $shop['address'] }}</span>

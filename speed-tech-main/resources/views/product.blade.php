@@ -1,6 +1,46 @@
-@extends('layouts.app', ['title' => $product->meta_title ? Str::before($product->meta_title, ' | ') : $product->name, 'description' => $product->meta_description ?: ($product->summary ?: Str::limit(strip_tags((string) $product->description), 155))])
+@extends('layouts.app', ['ogImage' => $product->imageUrl(), 'ogType' => 'product', 'title' => $product->meta_title ? Str::before($product->meta_title, ' | ') : $product->name, 'description' => $product->meta_description ?: ($product->summary ?: Str::limit(strip_tags((string) $product->description), 155))])
 
 @section('content')
+  @push('schema')
+    @php
+      $availability = match ($product->stockState()) {
+          'in', 'low', 'available' => 'https://schema.org/InStock',
+          'soon' => 'https://schema.org/BackOrder',
+          default => null,
+      };
+      $crumbs = array_values(array_filter([
+          ['Home', route('home')],
+          ['Shop', route('shop')],
+          $product->category ? [$product->category->name, route('shop', ['category' => $product->category->slug])] : null,
+          $product->category && $product->subcategory?->is_active ? [$product->subcategory->name, route('shop', ['category' => $product->category->slug, 'sub' => $product->subcategory->slug])] : null,
+          [$product->name, $product->url()],
+      ]));
+    @endphp
+    @include('partials.schema', ['data' => ['@graph' => [
+      array_filter([
+        '@type' => 'Product',
+        'name' => $product->name,
+        'description' => $product->meta_description ?: ($product->summary ?: Str::limit(strip_tags((string) $product->description), 300)),
+        'image' => $product->imageUrl(),
+        'sku' => $product->sku,
+        'mpn' => $product->oem_part_number ?: null,
+        'category' => trim(($product->category?->name ?? '').($product->subcategory ? ' > '.$product->subcategory->name : '')) ?: null,
+        'brand' => $product->brand ? ['@type' => 'Brand', 'name' => $product->brand] : null,
+        'url' => $product->url(),
+        'offers' => $product->price !== null ? array_filter([
+          '@type' => 'Offer',
+          'price' => number_format($product->sellingPrice(), 2, '.', ''),
+          'priceCurrency' => 'LKR',
+          'availability' => $availability,
+          'url' => $product->url(),
+          'itemCondition' => 'https://schema.org/NewCondition',
+          'priceValidUntil' => $product->hasOffer() ? $product->offer_ends_at?->toDateString() : null,
+          'seller' => ['@id' => url('/').'#business'],
+        ]) : null,
+      ]),
+      ['@type' => 'BreadcrumbList', 'itemListElement' => array_map(fn ($c, $i) => ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $c[0], 'item' => $c[1]], $crumbs, array_keys($crumbs))],
+    ]]])
+  @endpush
   <div class="wrap page-head">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="{{ route('home') }}">Home</a><span>/</span>

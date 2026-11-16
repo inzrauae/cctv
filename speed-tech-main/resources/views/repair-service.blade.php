@@ -1,9 +1,28 @@
 @extends('layouts.app', [
+  'ogImage' => ! empty($service['image']) ? 'assets/hero/'.$service['image'].'.jpg' : null,
   'title' => $service['name'].' in Kandy',
   'description' => $service['summary'].' Last Solution (Pvt) Ltd, Nugawela, Kandy.',
 ])
 
 @section('content')
+  @push('schema')
+    @include('partials.schema', ['data' => ['@graph' => [
+      [
+        '@type' => 'Service',
+        'name' => $service['name'],
+        'serviceType' => $service['name'],
+        'description' => $service['summary'],
+        'url' => route('repairs.show', $service['slug']),
+        'provider' => ['@id' => url('/').'#business'],
+        'areaServed' => [['@type' => 'City', 'name' => 'Kandy'], ['@type' => 'Country', 'name' => 'Sri Lanka']],
+      ],
+      ['@type' => 'BreadcrumbList', 'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => route('home')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Our services', 'item' => route('repairs')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $service['name'], 'item' => route('repairs.show', $service['slug'])],
+      ]],
+    ]]])
+  @endpush
   <section class="repair-hero service-hero">
     @if (! empty($service['image']))
       <div class="service-hero-photo" aria-hidden="true"><picture><source {{ responsive_img('assets/hero/'.$service['image'].'.webp', '100vw') }} type="image/webp"><img src="{{ asset('assets/hero/'.$service['image'].'.jpg') }}" alt="" fetchpriority="high" width="1600" height="1067"></picture></div>

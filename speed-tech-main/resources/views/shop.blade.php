@@ -4,6 +4,12 @@
 ])
 
 @section('content')
+  @if ($category && $search === '')
+    @push('schema')
+      @php($crumbs = array_values(array_filter([['Home', route('home')], ['Shop', route('shop')], [$category->name, route('shop', ['category' => $category->slug])], $subcategory ? [$subcategory->name, route('shop', ['category' => $category->slug, 'sub' => $subcategory->slug])] : null])))
+      @include('partials.schema', ['data' => ['@type' => 'BreadcrumbList', 'itemListElement' => array_map(fn ($c, $i) => ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $c[0], 'item' => $c[1]], $crumbs, array_keys($crumbs))]])
+    @endpush
+  @endif
   <div class="wrap page-head">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ route('home') }}">Home</a><span>/</span>@if ($category)<a href="{{ route('shop') }}">Shop</a><span>/</span>@if ($subcategory)<a href="{{ route('shop', ['category' => $category->slug]) }}">{{ $category->name }}</a><span>/</span><b>{{ $subcategory->name }}</b>@else<b>{{ $category->name }}</b>@endif @else<b>{{ $search !== '' ? 'Search' : 'Shop' }}</b>@endif</nav>
     <div class="eyebrow brand-text">CCTV · SECURITY · SMART HOME · NETWORK</div>

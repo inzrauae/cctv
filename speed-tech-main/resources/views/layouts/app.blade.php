@@ -10,6 +10,7 @@
   <script>document.documentElement.classList.add('js')</script>
   <title>{{ isset($title) ? $title.' | '.$shop['name'] : $shop['name'].' | CCTV & Security Solutions in Kandy' }}</title>
   <meta name="description" content="{{ $description ?? 'CCTV, alarm systems, smart door locks, intercoms, networking, Wi-Fi and smart home devices, plus A/C and appliance repair, solar power and battery backup. Last Solution (Pvt) Ltd, Nugawela, Kandy. Hikvision, HiLook, EZVIZ, Dahua, Imou, TP-Link and UNV.' }}">
+  @include('partials.seo')
   <link rel="icon" href="{{ asset('assets/favicon.png') }}" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -10,8 +10,14 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepairController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SeoController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
+
+// ---------------------------------------------------------------- Search engines & AI assistants
+Route::get('/robots.txt', [SeoController::class, 'robots']);
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/llms.txt', [SeoController::class, 'llms']);
 
 // ---------------------------------------------------------------- Storefront
 Route::get('/', HomeController::class)->name('home');

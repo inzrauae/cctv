@@ -2,6 +2,12 @@
 
 @section('content')
   @php($shop = config('shop'))
+  @push('schema')
+    @include('partials.schema', ['data' => [
+      '@type' => 'FAQPage',
+      'mainEntity' => array_map(fn ($faq) => ['@type' => 'Question', 'name' => $faq[0], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq[1]]], config('shop.home_faqs')),
+    ]])
+  @endpush
   @php($services = collect(config('shop.repair_services'))->keyBy('slug'))
 
   {{-- Hero: one slide per service family (photos: Pexels, free licence). Edit in config/shop.php → hero_slides. --}}
