@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#071a34">
+  <meta name="google-site-verification" content="u_gsvLTZm66-JhFm8Rt8kxJcxZx5-lZcW9qjLZqS2Fs" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script>document.documentElement.classList.add('js')</script>
   <title>{{ isset($title) ? $title.' | '.$shop['name'] : $shop['name'].' | CCTV & Security Solutions in Kandy' }}</title>
