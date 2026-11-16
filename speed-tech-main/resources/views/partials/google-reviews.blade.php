@@ -4,6 +4,12 @@
 <section class="wrap home-section google-reviews" aria-labelledby="reviews-title">
   <div class="section-head">
     <div><div class="eyebrow brand-text">REVIEWS FROM GOOGLE</div><h2 id="reviews-title">What our customers say</h2></div>
+    @if ($reviews && count($reviews['reviews']) > 1)
+      <div class="gr-arrows">
+        <button type="button" class="gr-arrow" data-review-prev aria-label="Previous reviews"><svg class="icon"><use href="#icon-arrow"/></svg></button>
+        <button type="button" class="gr-arrow" data-review-next aria-label="Next reviews"><svg class="icon"><use href="#icon-arrow"/></svg></button>
+      </div>
+    @endif
   </div>
 
   <div class="gr-layout">
@@ -24,7 +30,8 @@
     </div>
 
     @if ($reviews && $reviews['reviews'])
-      <div class="gr-list">
+      <div class="gr-carousel" data-review-carousel>
+      <div class="gr-list" data-review-track tabindex="0" aria-label="Customer reviews, scroll sideways for more">
         @foreach ($reviews['reviews'] as $review)
           <figure class="gr-card">
             <figcaption>
@@ -36,6 +43,8 @@
             @if ($review['url'])<a class="gr-more" href="{{ $review['url'] }}" target="_blank" rel="noopener">Read on Google</a>@endif
           </figure>
         @endforeach
+      </div>
+      <div class="gr-progress" aria-hidden="true"><i data-review-progress></i></div>
       </div>
     @endif
   </div>

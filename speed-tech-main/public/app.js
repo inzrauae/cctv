@@ -227,3 +227,60 @@ document.querySelectorAll('[data-map]').forEach((card) => {
   button.hidden = false;
   button.addEventListener('click', load, { once: true });
 });
+
+// Home reviews carousel: arrows, swipe, progress bar and gentle autoplay
+// (pauses on hover, touch, keyboard focus, off-screen or hidden tab; off for reduced motion).
+document.querySelectorAll('[data-review-carousel]').forEach((root) => {
+  const track = root.querySelector('[data-review-track]');
+  const section = root.closest('section');
+  const prev = section.querySelector('[data-review-prev]');
+  const next = section.querySelector('[data-review-next]');
+  const bar = root.querySelector('[data-review-progress]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const step = () => {
+    const card = track.firstElementChild;
+    return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 14) : 300;
+  };
+  const max = () => track.scrollWidth - track.clientWidth;
+  const update = () => {
+    const m = max();
+    if (prev) prev.disabled = track.scrollLeft <= 4;
+    if (next) next.disabled = track.scrollLeft >= m - 4;
+    if (bar) {
+      bar.style.width = Math.max((m > 0 ? track.clientWidth / track.scrollWidth : 1) * 100, 8) + '%';
+      bar.style.marginLeft = (m > 0 ? (track.scrollLeft / track.scrollWidth) * 100 : 0) + '%';
+    }
+  };
+  const go = (dir) => track.scrollBy({ left: dir * step(), behavior: reduce ? 'auto' : 'smooth' });
+
+  let timer = null, hovering = false, focused = false, inView = false, touchedAt = 0;
+  const tick = () => {
+    if (reduce || hovering || focused || !inView || document.hidden || Date.now() - touchedAt < 8000) return;
+    if (max() <= 4) return;
+    if (track.scrollLeft >= max() - 4) track.scrollTo({ left: 0, behavior: 'smooth' });
+    else go(1);
+  };
+  const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(tick, 5000); };
+
+  prev?.addEventListener('click', () => { go(-1); restart(); });
+  next?.addEventListener('click', () => { go(1); restart(); });
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
+  track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  track.addEventListener('touchstart', () => { touchedAt = Date.now(); }, { passive: true });
+  section.addEventListener('mouseenter', () => { hovering = true; });
+  section.addEventListener('mouseleave', () => { hovering = false; });
+  // Pause for keyboard users only; a mouse click on an arrow shouldn't stop autoplay for good.
+  section.addEventListener('focusin', (e) => { focused = e.target.matches(':focus-visible'); });
+  section.addEventListener('focusout', (e) => { if (!section.contains(e.relatedTarget)) focused = false; });
+  window.addEventListener('resize', update);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => { inView = entries[0].isIntersecting; }, { threshold: 0.3 }).observe(track);
+  } else {
+    inView = true;
+  }
+  update();
+  restart();
+});

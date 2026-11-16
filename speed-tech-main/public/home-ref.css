@@ -217,3 +217,25 @@ a.maker-card:hover{border-color:#9cc3ea;box-shadow:0 14px 30px #102f5114;transfo
 @media(max-width:700px){.reviews-page .gr-list-page{grid-auto-flow:row;grid-template-columns:1fr;grid-auto-columns:auto;overflow:visible;margin-inline:0;padding:0}}
 .gr-photos{display:flex;flex-wrap:wrap;gap:6px}
 .gr-photos img{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #e1e8f2}
+
+/* Home reviews carousel */
+.google-reviews .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.gr-arrows{display:flex;gap:8px;flex-shrink:0}
+.gr-arrow{display:grid;place-items:center;width:44px;height:44px;border:1px solid #d6dfeb;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s,opacity .2s}
+.gr-arrow .icon{width:20px;height:20px}
+.gr-arrow[data-review-prev] .icon{transform:rotate(180deg)}
+.gr-arrow:hover:not(:disabled){background:#c8102e;border-color:#c8102e;color:#fff}
+.gr-arrow:disabled{opacity:.35;cursor:default}
+.gr-carousel{min-width:0;display:flex;flex-direction:column;gap:12px}
+.gr-carousel .gr-list{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 28px) / 3);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:2px}
+.gr-carousel .gr-list::-webkit-scrollbar{display:none}
+.gr-carousel .gr-card{scroll-snap-align:start}
+.gr-carousel .gr-list:focus-visible{outline:2px solid #1a56b0;outline-offset:4px;border-radius:16px}
+.gr-progress{height:4px;border-radius:4px;background:#e3e9f2;overflow:hidden}
+.gr-progress i{display:block;height:100%;width:25%;border-radius:4px;background:#c8102e;transition:margin-left .2s,width .2s}
+@media(max-width:1100px){.gr-carousel .gr-list{grid-auto-columns:calc((100% - 14px) / 2)}}
+@media(max-width:700px){
+  .gr-arrows{display:none}
+  .gr-carousel .gr-list{grid-auto-columns:85%;margin-inline:-18px;padding:0 18px 2px;scroll-padding-inline:18px}
+}
+@media(max-width:700px){.google-reviews .section-head{align-items:flex-start}}
