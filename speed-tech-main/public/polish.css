@@ -193,3 +193,8 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:mani
 .sub-chips a.active{background:#c8102e;border-color:#c8102e;color:#fff}.sub-chips a.active small{color:#ffe1e4}
 @media(max-width:1000px){.filter-sublist{display:none}} /* the chips above the products do this job on small screens */
 .shop-page>div{min-width:0}
+
+/* Footer: developer credit */
+.footer-credit a{color:#e7e7ec;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#ffffff55}
+.footer-credit a:hover{color:#fff;text-decoration-color:#fff}
+@media(min-width:701px){footer .footer-bottom{padding-right:110px}} /* keep clear of the floating WhatsApp button */

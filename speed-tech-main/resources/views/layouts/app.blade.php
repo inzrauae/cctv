@@ -105,7 +105,7 @@
       </div>
     </div>
 
-    <div class="wrap footer-bottom"><span>© {{ date('Y') }} {{ $shop['legal_name'] }}. All rights reserved.</span><span>Secure your life, anytime &amp; anywhere.</span></div>
+    <div class="wrap footer-bottom"><span>© {{ date('Y') }} {{ $shop['legal_name'] }}. All rights reserved.</span><span>Secure your life, anytime &amp; anywhere.</span><span class="footer-credit">Developed by <a href="https://seoconsultantsrilanka.com/" target="_blank" rel="noopener">Buddhika S Weerasekara</a></span></div>
   </footer>
 
   {{-- Repair booking --}}
