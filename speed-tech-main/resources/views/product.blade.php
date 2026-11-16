@@ -6,6 +6,7 @@
       <a href="{{ route('home') }}">Home</a><span>/</span>
       <a href="{{ route('shop') }}">Shop</a><span>/</span>
       @if ($product->category)<a href="{{ route('shop', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a><span>/</span>@endif
+      @if ($product->category && $product->subcategory?->is_active)<a href="{{ route('shop', ['category' => $product->category->slug, 'sub' => $product->subcategory->slug]) }}">{{ $product->subcategory->name }}</a><span>/</span>@endif
       <b>{{ $product->name }}</b>
     </nav>
   </div>

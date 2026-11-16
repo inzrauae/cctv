@@ -17,7 +17,7 @@ class Product extends Model
     public const LOW_STOCK = 3;
 
     protected $fillable = [
-        'category_id', 'name', 'brand', 'slug', 'sku', 'oem_part_number',
+        'category_id', 'subcategory_id', 'name', 'brand', 'slug', 'sku', 'oem_part_number',
         'tag', 'summary', 'description', 'meta_title', 'meta_description', 'specification', 'connector_type', 'size',
         'price', 'offer_price', 'offer_ends_at', 'cost_price', 'stock_qty', 'restock_soon', 'reorder_level', 'warranty', 'image', 'is_featured', 'is_active',
     ];
@@ -48,6 +48,11 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory(): BelongsTo
+    {
+        return $this->belongsTo(Subcategory::class);
     }
 
     public function stockMovements(): HasMany

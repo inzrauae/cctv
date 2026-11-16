@@ -21,6 +21,14 @@
             <label class="field">Shop category
               <select name="category_id" required><option value="">Choose…</option>@foreach ($categories as $c)<option value="{{ $c->id }}" @selected(old('category_id', $product->category_id) == $c->id)>{{ $c->name }}</option>@endforeach</select>
             </label>
+            <label class="field">Sub-category <small>— optional, e.g. IP or Analog</small>
+              <select name="subcategory_id" data-subcategory>
+                <option value="">None</option>
+                @foreach ($categories as $c)
+                  @foreach ($c->subcategories as $s)<option value="{{ $s->id }}" data-category="{{ $c->id }}" @selected(old('subcategory_id', $product->subcategory_id) == $s->id)>{{ $s->name }}@unless ($s->is_active) (hidden)@endunless</option>@endforeach
+                @endforeach
+              </select>
+            </label>
             <label class="field">Card label <small>(e.g. NIGHT VISION)</small><input name="tag" value="{{ old('tag', $product->tag) }}" maxlength="40"></label>
             <label class="field span-2">Short summary <small>(shown on product cards)</small><input name="summary" value="{{ old('summary', $product->summary) }}" maxlength="500"></label>
             <label class="field span-2">Description<textarea name="description" rows="6" maxlength="10000">{{ old('description', $product->description) }}</textarea></label>
@@ -129,6 +137,23 @@
       const show = () => { counter.textContent = `· ${input.value.length} now`; };
       input.addEventListener('input', show); show();
     });
+
+    // Sub-category list follows the chosen shop category.
+    const categorySelect = form.querySelector('[name="category_id"]');
+    const subSelect = form.querySelector('[data-subcategory]');
+    const syncSubs = () => {
+      let any = false;
+      subSelect.querySelectorAll('option[data-category]').forEach(option => {
+        const match = option.dataset.category === categorySelect.value;
+        option.hidden = !match;
+        option.disabled = !match;
+        any ||= match;
+        if (!match && option.selected) subSelect.value = '';
+      });
+      subSelect.closest('label').hidden = !any;
+    };
+    categorySelect.addEventListener('change', syncSubs);
+    syncSubs();
 
     document.getElementById('imageInput')?.addEventListener('change', e => {
       const file = e.target.files[0];

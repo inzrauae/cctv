@@ -22,7 +22,9 @@ class TaxonomyController extends Controller
     public function index(string $type): View
     {
         $config = $this->config($type);
-        $items = $config['model']::withCount($config['count'])->orderBy('sort_order')->orderBy('name')->get();
+        $items = $config['model']::withCount($config['count'])
+            ->with(['subcategories' => fn ($q) => $q->withCount('products')])
+            ->orderBy('sort_order')->orderBy('name')->get();
 
         return view('admin.catalog.index', compact('type', 'config', 'items'));
     }

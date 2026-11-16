@@ -170,3 +170,10 @@ details.adjust[open] summary{background:var(--dark);color:#fff;border-color:var(
 .offer-fields legend{padding:0 6px;font-size:12px;font-weight:700;color:#c8102e}
 .offer-fields .help{margin:0}
 td.num small{display:block;color:var(--muted)}
+
+/* Sub-categories under each shop category */
+.sub-row td{padding-top:0!important;background:#fafbfc}
+.sub-row summary{cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);padding:6px 0}
+.sub-list{display:grid;gap:6px;padding:4px 0 10px 14px;border-left:2px solid var(--line);margin-left:6px}
+.sub-item{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sub-arrow{color:var(--muted);font-weight:700;width:14px;text-align:center}

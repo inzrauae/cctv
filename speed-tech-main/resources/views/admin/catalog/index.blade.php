@@ -1,7 +1,7 @@
 @extends('admin.layout', ['title' => $config['title']])
 
 @section('content')
-  <p class="help">{{ $config['help'] }} Lower sort numbers appear first. Hidden items stay in the database but don't show in the store.</p>
+  <p class="help">{{ $config['help'] }} Each category can have sub-categories (e.g. CCTV Cameras → IP Cameras, Analog Cameras); customers can filter by them in the shop. Lower sort numbers appear first. Hidden items stay in the database but don't show in the store.</p>
 
   <section class="card">
     <h2>Add {{ $config['singular'] }}</h2>
@@ -40,6 +40,41 @@
               @csrf @method('DELETE')
               <button class="btn sm danger" type="submit" aria-label="Delete {{ $item->name }}"><svg class="icon"><use href="#icon-trash"/></svg></button>
             </form>
+          </td>
+        </tr>
+        <tr class="sub-row">
+          <td colspan="3">
+            <details @if ($item->subcategories->isNotEmpty()) open @endif>
+              <summary>Sub-categories in {{ $item->name }} <small>({{ $item->subcategories->count() }})</small></summary>
+              <div class="sub-list">
+                @foreach ($item->subcategories as $sub)
+                  <div class="sub-item">
+                    <form class="inline-form" method="post" action="{{ route('admin.subcategories.update', $sub) }}">
+                      @csrf @method('PUT')
+                      <span class="sub-arrow" aria-hidden="true">↳</span>
+                      <input class="w-lg" name="name" value="{{ $sub->name }}" required maxlength="100" aria-label="Sub-category name">
+                      <input class="w-md" name="slug" value="{{ $sub->slug }}" maxlength="100" aria-label="Slug">
+                      <input class="w-sm" type="number" name="sort_order" value="{{ $sub->sort_order }}" min="0" aria-label="Sort order">
+                      <label class="check"><input type="checkbox" name="is_active" value="1" @checked($sub->is_active)> Visible</label>
+                      <button class="btn sm" type="submit">Save</button>
+                      <span class="help" style="margin:0">{{ $sub->products_count }} {{ Str::plural('product', $sub->products_count) }}</span>
+                    </form>
+                    <form method="post" action="{{ route('admin.subcategories.destroy', $sub) }}" data-confirm="Delete “{{ $sub->name }}”? Its products stay in {{ $item->name }}.">
+                      @csrf @method('DELETE')
+                      <button class="btn sm danger" type="submit" aria-label="Delete {{ $sub->name }}"><svg class="icon"><use href="#icon-trash"/></svg></button>
+                    </form>
+                  </div>
+                @endforeach
+                <form class="inline-form sub-add" method="post" action="{{ route('admin.subcategories.store', $item) }}">
+                  @csrf
+                  <span class="sub-arrow" aria-hidden="true">+</span>
+                  <input class="w-lg" name="name" placeholder="New sub-category, e.g. IP Cameras" required maxlength="100">
+                  <input class="w-sm" type="number" name="sort_order" placeholder="Sort" min="0" value="{{ $item->subcategories->max('sort_order') + 1 }}">
+                  <input type="hidden" name="is_active" value="1">
+                  <button class="btn sm" type="submit">Add sub-category</button>
+                </form>
+              </div>
+            </details>
           </td>
         </tr>
       @empty

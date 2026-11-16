@@ -61,6 +61,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('catalog/{type}', [Admin\TaxonomyController::class, 'store'])->name('catalog.store');
         Route::put('catalog/{type}/{id}', [Admin\TaxonomyController::class, 'update'])->name('catalog.update');
         Route::delete('catalog/{type}/{id}', [Admin\TaxonomyController::class, 'destroy'])->name('catalog.destroy');
+        Route::post('categories/{category}/subcategories', [Admin\SubcategoryController::class, 'store'])->name('subcategories.store');
+        Route::put('subcategories/{subcategory}', [Admin\SubcategoryController::class, 'update'])->name('subcategories.update');
+        Route::delete('subcategories/{subcategory}', [Admin\SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
 
         Route::get('orders', [Admin\OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{order}', [Admin\OrderController::class, 'show'])->name('orders.show');

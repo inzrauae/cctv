@@ -25,12 +25,24 @@ class ShopController extends Controller
         $request->validate([
             'q' => ['nullable', 'string', 'max:100'],
             'category' => ['nullable', 'string', 'max:100'],
+            'sub' => ['nullable', 'string', 'max:100'],
             'brand' => ['nullable', 'string', 'max:60'],
             'sort' => ['nullable', 'in:'.implode(',', array_keys(self::SORTS))],
         ]);
 
         $categories = Category::active()->withCount(['products' => fn ($q) => $q->active()])->get();
         $category = $categories->firstWhere('slug', $request->query('category'));
+
+        // Sub-categories of the chosen category (e.g. IP / Analog), with counts that respect the brand filter.
+        $subcategories = collect();
+        $subcategory = null;
+        if ($category) {
+            $brandFilter = in_array($request->query('brand'), config('shop.brands'), true) ? $request->query('brand') : null;
+            $subcategories = $category->subcategories()->where('is_active', true)
+                ->withCount(['products' => fn ($q) => $q->active()->when($brandFilter, fn ($q) => $q->where('brand', $brandFilter))])
+                ->get();
+            $subcategory = $subcategories->firstWhere('slug', $request->query('sub'));
+        }
         $search = trim((string) $request->query('q'));
         $sort = $request->query('sort', 'featured');
         $inStock = $request->boolean('in_stock');
@@ -42,6 +54,9 @@ class ShopController extends Controller
 
         if ($category) {
             $query->where('category_id', $category->id);
+        }
+        if ($subcategory) {
+            $query->where('subcategory_id', $subcategory->id);
         }
         if ($brand) {
             $query->where('brand', $brand);
@@ -63,6 +78,8 @@ class ShopController extends Controller
             'products' => $query->paginate(16)->withQueryString(),
             'categories' => $categories,
             'category' => $category,
+            'subcategories' => $subcategories,
+            'subcategory' => $subcategory,
             'search' => $search,
             'sort' => $sort,
             'inStock' => $inStock,

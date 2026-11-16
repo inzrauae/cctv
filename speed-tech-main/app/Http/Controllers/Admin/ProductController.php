@@ -75,7 +75,7 @@ class ProductController extends Controller
     {
         return [
             'product' => $product,
-            'categories' => Category::orderBy('sort_order')->orderBy('name')->get(),
+            'categories' => Category::with('subcategories')->orderBy('sort_order')->orderBy('name')->get(),
         ];
     }
 
@@ -88,6 +88,8 @@ class ProductController extends Controller
             'oem_part_number' => ['nullable', 'string', 'max:100'],
             'brand' => ['nullable', Rule::in(config('shop.brands'))],
             'category_id' => ['required', 'exists:categories,id'],
+            // Must belong to the chosen category.
+            'subcategory_id' => ['nullable', Rule::exists('subcategories', 'id')->where('category_id', $request->input('category_id'))],
             'tag' => ['nullable', 'string', 'max:40'],
             'summary' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:10000'],
@@ -108,6 +110,7 @@ class ProductController extends Controller
             'is_active' => ['nullable', 'boolean'],
         ], [
             'category_id.required' => 'Choose a shop category.',
+            'subcategory_id.exists' => 'That sub-category is not part of the chosen shop category.',
             'offer_price.lt' => 'The offer price must be lower than the regular price.',
             'offer_price.required_with' => 'Add an offer price, or clear the offer end date.',
         ]);

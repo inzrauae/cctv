@@ -181,3 +181,15 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent;touch-action:mani
 .install-note{display:flex;align-items:flex-start;gap:6px;margin:8px 0 10px;font-size:12px;line-height:1.45;color:#8a5a00}
 .install-note .icon{width:14px;height:14px;flex-shrink:0;margin-top:1px;color:#b45309}
 .order-summary .install-note{margin:14px 0 0;padding:10px 12px;border-radius:8px;background:#fff7e8}
+
+/* Shop: sub-categories (e.g. IP / Analog) */
+.filter-sublist{list-style:none;margin:2px 0 6px 10px;padding:0 0 0 8px;border-left:2px solid #f3d3d7}
+.filter-sublist a{font-size:12px;padding:6px 10px}
+.sub-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px;padding-bottom:2px}
+.sub-chips::-webkit-scrollbar{display:none}
+.sub-chips a{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;min-height:38px;padding:8px 14px;border:1px solid #dfe5ee;border-radius:999px;background:#fff;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.sub-chips a small{font-size:11px;color:var(--muted);font-weight:500}
+.sub-chips a:hover{border-color:#c8102e}
+.sub-chips a.active{background:#c8102e;border-color:#c8102e;color:#fff}.sub-chips a.active small{color:#ffe1e4}
+@media(max-width:1000px){.filter-sublist{display:none}} /* the chips above the products do this job on small screens */
+.shop-page>div{min-width:0}

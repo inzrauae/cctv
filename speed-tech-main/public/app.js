@@ -284,3 +284,11 @@ document.querySelectorAll('[data-review-carousel]').forEach((root) => {
   update();
   restart();
 });
+
+// Shop sub-category chips: bring the selected chip into view (sideways only, never moves the page).
+document.querySelectorAll('.sub-chips').forEach((row) => {
+  const active = row.querySelector('a.active');
+  if (active && active.offsetLeft + active.offsetWidth > row.clientWidth) {
+    row.scrollLeft = active.offsetLeft - (row.clientWidth - active.offsetWidth) / 2;
+  }
+});
