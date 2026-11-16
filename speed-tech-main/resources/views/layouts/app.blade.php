@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="{{ asset('last-solution.css') }}?v={{ filemtime(public_path('last-solution.css')) }}">
   <link rel="stylesheet" href="{{ asset('home.css') }}?v={{ filemtime(public_path('home.css')) }}">
   @if (request()->routeIs('home', 'repairs.show'))<link rel="stylesheet" href="{{ asset('home-sections.css') }}?v={{ filemtime(public_path('home-sections.css')) }}">@endif
-  @if (request()->routeIs('home'))<link rel="stylesheet" href="{{ asset('home-ref.css') }}?v={{ filemtime(public_path('home-ref.css')) }}">@endif
+  @if (request()->routeIs('home', 'reviews'))<link rel="stylesheet" href="{{ asset('home-ref.css') }}?v={{ filemtime(public_path('home-ref.css')) }}">@endif
   <link rel="stylesheet" href="{{ asset('polish.css') }}?v={{ filemtime(public_path('polish.css')) }}">
 </head>
 <body>
@@ -90,6 +90,7 @@
         <a href="{{ route('shop') }}">Shop</a>
         @if ($offerCount)<a href="{{ route('offers') }}">Special offers</a>@endif
         <a href="{{ route('about') }}">About us</a>
+        <a href="{{ route('reviews') }}">Customer reviews</a>
         <a href="{{ route('contact') }}">Contact us</a>
         @if ($shop['facebook_url'])<a href="{{ $shop['facebook_url'] }}" target="_blank" rel="noopener">Facebook page</a>@endif
         @if ($shop['tiktok_url'])<a href="{{ $shop['tiktok_url'] }}" target="_blank" rel="noopener">TikTok</a>@endif

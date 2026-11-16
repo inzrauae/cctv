@@ -47,7 +47,7 @@ class GoogleReviewsTest extends TestCase
 
         $this->get('/')->assertOk()
             ->assertSee('4.9')
-            ->assertSee('Based on 37 reviews on Google')
+            ->assertSee('Based on 37 reviews from our customers on Google')
             ->assertSee('Kasun P')
             ->assertSee('Great CCTV installation, very neat work.')
             ->assertSee('placeid=ChIJtest', false);

@@ -9,6 +9,7 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RepairController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::redirect('/spare-parts', '/shop', 301);
 Route::get('/offers', OfferController::class)->name('offers');
 Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
+Route::get('/reviews', ReviewController::class)->name('reviews');
 Route::get('/repairs', [RepairController::class, 'index'])->name('repairs');
 Route::redirect('/repairs/led-sign-boards', '/repairs', 301);
 Route::get('/repairs/{service}', [RepairController::class, 'show'])->name('repairs.show');
@@ -73,6 +75,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('settings', [Admin\SettingsController::class, 'edit'])->name('settings');
         Route::put('settings', [Admin\SettingsController::class, 'update'])->name('settings.update');
+
+        Route::post('reviews/import', [Admin\ReviewController::class, 'import'])->name('reviews.import');
+        Route::patch('reviews/{review}/toggle', [Admin\ReviewController::class, 'toggle'])->name('reviews.toggle');
+        Route::resource('reviews', Admin\ReviewController::class)->except('show');
 
         Route::get('enquiries', [Admin\EnquiryController::class, 'index'])->name('enquiries.index');
         Route::get('enquiries/{enquiry}', [Admin\EnquiryController::class, 'show'])->name('enquiries.show');

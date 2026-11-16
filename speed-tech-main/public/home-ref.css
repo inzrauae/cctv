@@ -208,3 +208,10 @@ a.maker-card:hover{border-color:#9cc3ea;box-shadow:0 14px 30px #102f5114;transfo
   .gr-list{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:85%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:-18px;padding:0 18px 6px;scroll-padding-inline:18px}
   .gr-list::-webkit-scrollbar{display:none}.gr-card{scroll-snap-align:start}
 }
+/* Reviews page: full text, owner replies */
+.gr-list-page{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gr-card blockquote.full{display:block;-webkit-line-clamp:unset;overflow:visible}
+.gr-reply{padding:10px 12px;border-left:3px solid #c8102e;border-radius:0 8px 8px 0;background:#f7f9fc;font-size:13px;line-height:1.55;color:#3b4250}
+.gr-reply b{display:block;margin-bottom:2px;font-size:12px;color:var(--ink)}
+@media(max-width:1100px){.gr-list-page{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.reviews-page .gr-list-page{grid-auto-flow:row;grid-template-columns:1fr;grid-auto-columns:auto;overflow:visible;margin-inline:0;padding:0}}

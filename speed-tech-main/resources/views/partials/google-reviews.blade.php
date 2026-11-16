@@ -13,7 +13,7 @@
         <div class="gr-score"><b>{{ number_format($reviews['rating'], 1) }}</b>
           <span class="gr-stars" style="--rating:{{ $reviews['rating'] }}" role="img" aria-label="Rated {{ number_format($reviews['rating'], 1) }} out of 5"></span>
         </div>
-        <p>Based on {{ $reviews['count'] }} {{ Str::plural('review', $reviews['count']) }} on Google</p>
+        <p>Based on {{ $reviews['count'] }} {{ Str::plural('review', $reviews['count']) }} from our customers on Google</p>
       @else
         <p class="gr-intro">See what customers in Kandy say about our CCTV installation, repairs and service.</p>
       @endif

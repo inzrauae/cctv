@@ -21,6 +21,7 @@
           ['admin.products.index', 'Products', 'box', 'admin.products.*', null],
           ['admin.inventory.index', 'Inventory', 'storage', 'admin.inventory.*', null],
           ['admin.catalog.index', 'Shop categories', 'tag', 'admin.catalog.*', 'categories'],
+          ['admin.reviews.index', 'Customer reviews', 'users', 'admin.reviews.*', null],
           ['admin.settings', 'Payments & delivery', 'truck', 'admin.settings*', null],
         ])
         @foreach ($nav as [$route, $label, $icon, $pattern, $param])
