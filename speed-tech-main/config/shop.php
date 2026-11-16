@@ -180,6 +180,15 @@ return [
     'tiktok_url' => env('SHOP_TIKTOK_URL', 'https://www.tiktok.com/@last_solution_pvt_ltd'),
     'maps_embed' => env('SHOP_MAPS_EMBED', 'https://maps.google.com/maps?q='.rawurlencode('No: 135/8 Ebulpuraya, Nugawela, Kandy, Sri Lanka').'&z=16&output=embed'),
 
+    // Google reviews section on the home page (see app/Services/GoogleReviews.php).
+    // Without an API key the section links to the Google listing instead of showing reviews.
+    'google_reviews' => [
+        'api_key' => env('GOOGLE_PLACES_API_KEY'),
+        'place_id' => env('GOOGLE_PLACE_ID'),
+        'search' => 'LAST SOLUTION (PVT) LTD cctv installation kandy',
+        'listing_url' => env('GOOGLE_REVIEWS_URL', 'https://www.google.com/maps?cid=12639943915634735336'),
+    ],
+
     // Orders
     'currency' => env('SHOP_CURRENCY', 'Rs.'),
     'delivery_fee' => (float) env('SHOP_DELIVERY_FEE', 450),

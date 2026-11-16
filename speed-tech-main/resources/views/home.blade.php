@@ -414,6 +414,9 @@
     </div>
   </section>
 
+  {{-- Google reviews --}}
+  @include('partials.google-reviews')
+
   {{-- Shop by brand --}}
   @if ($brandList = config('shop.brands'))
     <section class="wrap home-section maker-section" aria-labelledby="brands-title">

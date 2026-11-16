@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\GoogleReviews;
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function __invoke(): View
+    public function __invoke(GoogleReviews $reviews): View
     {
         $featured = Product::active()->with('category')
             ->orderByDesc('is_featured')->latest('updated_at')->take(4)->get();
@@ -33,6 +34,7 @@ class HomeController extends Controller
             'brandProducts' => $brandProducts,
             'featured' => $featured,
             'offers' => $offers,
+            'reviews' => $reviews->get(),
             'categories' => Category::active()->withCount(['products' => fn ($q) => $q->active()])->get(),
         ]);
     }
