@@ -88,6 +88,50 @@ class ReviewsTest extends TestCase
         $this->assertFalse($nimal->fresh()->is_visible);
     }
 
+    public function test_import_reviews_list_json_with_relative_dates_and_photos(): void
+    {
+        $json = json_encode(['place' => '', 'count' => 2, 'reviews' => [
+            [
+                'id' => 'Ci9abc', 'name' => 'Ishara J', 'rating' => 5, 'date' => '2 years ago',
+                'text' => 'Neat wiring, highly recommended!', 'owner_reply' => 'Thank you!',
+                'avatar' => 'images/avatar_1.jpg', 'avatar_original' => 'https://lh3.googleusercontent.com/a-/x=s120',
+                'photos' => ['images/photo_1.jpg'], 'photos_original' => ['https://lh3.googleusercontent.com/grass-cs/p=s1200', 'javascript:alert(1)'],
+            ],
+            [
+                'id' => 'Ci9ghi', 'name' => 'Stars Only', 'rating' => 5, 'date' => 'a week ago',
+                'text' => 'Thanking you!', 'owner_reply' => 'Thanking you!', 'avatar_original' => '', 'photos_original' => [],
+            ],
+            [
+                'id' => 'Ci9def', 'name' => 'Daysinn', 'rating' => 1, 'date' => 'Edited a month ago',
+                'text' => '', 'owner_reply' => '', 'avatar_original' => '', 'photos_original' => [],
+            ],
+        ]]);
+
+        $this->actingAs($this->admin)
+            ->post('/admin/reviews/import', ['file' => UploadedFile::fake()->createWithContent('reviews.json', $json)])
+            ->assertSessionHas('status', 'Import finished: 3 new, 0 updated.');
+
+        $ishara = Review::where('author_name', 'Ishara J')->sole();
+        $this->assertSame('https://lh3.googleusercontent.com/a-/x=s120', $ishara->author_photo_url);
+        $this->assertSame(['https://lh3.googleusercontent.com/grass-cs/p=s1200'], $ishara->photos); // unsafe link dropped
+        $this->assertSame('Thank you!', $ishara->reply);
+        $starsOnly = Review::where('author_name', 'Stars Only')->sole();
+        $this->assertNull($starsOnly->text); // the copied reply is not shown as the customer's words
+        $this->assertSame('Thanking you!', $starsOnly->reply);
+        $this->assertTrue($ishara->reviewed_at->between(now()->subYears(2)->subDay(), now()->subYears(2)->addDay()));
+        $this->assertTrue(Review::where('author_name', 'Daysinn')->sole()->reviewed_at->between(now()->subMonth()->subDay(), now()->subMonth()->addDay()));
+
+        // Re-import a week later: no duplicates, and the first (approximate) date is kept.
+        $firstDate = $ishara->reviewed_at;
+        $this->travel(7)->days();
+        $this->actingAs($this->admin)
+            ->post('/admin/reviews/import', ['file' => UploadedFile::fake()->createWithContent('reviews.json', $json)])
+            ->assertSessionHas('status', 'Import finished: 0 new, 3 updated.');
+        $this->assertTrue($ishara->fresh()->reviewed_at->equalTo($firstDate));
+
+        $this->get('/reviews')->assertOk()->assertSee('grass-cs/p=s1200', false);
+    }
+
     public function test_import_rejects_files_without_reviews(): void
     {
         $file = UploadedFile::fake()->createWithContent('reviews.json', '{"title":"nothing here"}');
@@ -114,6 +158,16 @@ class ReviewsTest extends TestCase
 
         $this->actingAs($this->admin)->delete("/admin/reviews/{$review->id}");
         $this->assertSame(0, Review::count());
+    }
+
+    public function test_reviews_page_paginates_many_reviews(): void
+    {
+        foreach (range(1, 30) as $i) {
+            Review::create(['author_name' => "Customer {$i}", 'rating' => 5, 'text' => "Review {$i}", 'reviewed_at' => now()->subDays($i)]);
+        }
+
+        $this->get('/reviews')->assertOk()->assertSee('Customer 1')->assertDontSee('Customer 30');
+        $this->get('/reviews?page=2')->assertOk()->assertSee('Customer 30');
     }
 
     public function test_guests_cannot_manage_reviews(): void

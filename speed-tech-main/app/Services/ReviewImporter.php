@@ -8,8 +8,10 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 
 /**
- * Imports reviews from a Google Takeout "Google Business Profile" export
- * (the whole .zip, or a reviews .json file from inside it).
+ * Imports Google reviews from either
+ *  - a Google Takeout "Google Business Profile" export (the whole .zip, or the reviews .json inside it), or
+ *  - a reviews.json list like {"reviews": [{"id", "name", "rating": 5, "date": "2 years ago", "text",
+ *    "owner_reply", "avatar_original", "photos_original": [...]}]} (relative dates are turned into real ones).
  *
  * The export stores reviews in the same shape as Google's Business Profile API:
  *   {"reviews": [{"reviewId", "reviewer": {"displayName", "profilePhotoUrl"},
@@ -77,6 +79,11 @@ class ReviewImporter
 
             return;
         }
+        if (isset($node['rating'], $node['name']) && is_numeric($node['rating']) && (array_key_exists('text', $node) || array_key_exists('owner_reply', $node))) {
+            $out[] = $this->fromList($node);
+
+            return;
+        }
         foreach ($node as $child) {
             if (is_array($child)) {
                 $this->collect($child, $out);
@@ -106,10 +113,17 @@ class ReviewImporter
                 'text' => $this->original(Arr::get($raw, 'comment')),
                 'reply' => $this->original(Arr::get($raw, 'reviewReply.comment')),
                 'reviewed_at' => $this->date($raw['createTime'] ?? $raw['updateTime'] ?? null),
+                'photos' => ($raw['photos'] ?? []) ?: null,
                 'source' => 'google',
             ];
+            if ($attributes['text'] !== null && $attributes['text'] === $attributes['reply']) {
+                $attributes['text'] = null; // star-only review: some exports copy the owner's reply into the text
+            }
 
             $existing = $id ? Review::where('external_id', 'google:'.$id)->first() : null;
+            if ($existing && ! empty($raw['relativeDate']) && $existing->reviewed_at) {
+                unset($attributes['reviewed_at']); // "2 years ago" is approximate; keep the first date
+            }
             if ($existing) {
                 $existing->update($attributes); // keeps the admin's shown/hidden and featured choices
                 $result['updated']++;
@@ -120,6 +134,34 @@ class ReviewImporter
         }
 
         return $result;
+    }
+
+    /** Maps the simple list format onto the Takeout shape used by save(). */
+    private function fromList(array $node): array
+    {
+        $photos = collect($node['photos_original'] ?? [])->filter(fn ($url) => $this->photo($url))->take(6)->values()->all();
+
+        return [
+            'reviewId' => $node['id'] ?? null,
+            'reviewer' => ['displayName' => $node['name'], 'profilePhotoUrl' => $node['avatar_original'] ?? null],
+            'starRating' => (int) $node['rating'],
+            'comment' => $node['text'] ?? null,
+            'reviewReply' => ['comment' => $node['owner_reply'] ?? null],
+            'createTime' => $this->relativeDate((string) ($node['date'] ?? '')),
+            'relativeDate' => true,
+            'photos' => $photos,
+        ];
+    }
+
+    /** "2 years ago", "a month ago", "Edited 3 weeks ago" → an ISO date (approximate, as Google shows it). */
+    private function relativeDate(string $text): ?string
+    {
+        if (! preg_match('/(a|an|one|\d+)\s+(minute|hour|day|week|month|year)s?\s+ago/i', $text, $m)) {
+            return null;
+        }
+        $amount = is_numeric($m[1]) ? (int) $m[1] : 1;
+
+        return now()->sub(strtolower($m[2]), $amount)->toIso8601String();
     }
 
     /** Google adds a "(Translated by Google)" version; keep only the customer's own words. */

@@ -55,7 +55,7 @@ class HomeController extends Controller
             'rating' => round((float) $stats->average, 1),
             'count' => (int) $stats->total,
             'url' => route('reviews'),
-            'reviews' => Review::forDisplay()->take(6)->get()->map(fn (Review $review) => [
+            'reviews' => Review::forDisplay()->whereNotNull('text')->take(6)->get()->map(fn (Review $review) => [
                 'author' => $review->author_name,
                 'author_url' => null,
                 'photo' => $review->author_photo_url,

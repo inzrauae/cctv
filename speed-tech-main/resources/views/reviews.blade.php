@@ -35,11 +35,14 @@
             </figcaption>
             <span class="gr-stars" style="--rating:{{ $review->rating }}" role="img" aria-label="{{ $review->rating }} out of 5 stars"></span>
             @if ($review->text)<blockquote class="full">{{ $review->text }}</blockquote>@endif
+            @if ($review->photos)
+              <div class="gr-photos">@foreach ($review->photos as $photo)<a href="{{ $photo }}" target="_blank" rel="noopener"><img src="{{ $photo }}" alt="Photo from {{ $review->author_name }}'s review" width="72" height="72" loading="lazy" referrerpolicy="no-referrer"></a>@endforeach</div>
+            @endif
             @if ($review->reply)<div class="gr-reply"><b>Reply from Last Solution</b>{{ $review->reply }}</div>@endif
           </figure>
         @endforeach
       </div>
-      @include('partials.pagination', ['paginator' => $reviews])
+      {{ $reviews->links() }}
     @else
       <p class="gr-intro">Our reviews are on Google. Tap the button above to read them or leave your own.</p>
     @endif

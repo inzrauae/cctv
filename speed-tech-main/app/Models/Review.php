@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     protected $fillable = [
-        'author_name', 'author_photo_url', 'rating', 'text', 'reply', 'reviewed_at',
+        'author_name', 'author_photo_url', 'rating', 'text', 'reply', 'photos', 'reviewed_at',
         'source', 'external_id', 'is_visible', 'is_featured',
     ];
 
@@ -16,6 +16,7 @@ class Review extends Model
     {
         return [
             'rating' => 'integer',
+            'photos' => 'array',
             'reviewed_at' => 'datetime',
             'is_visible' => 'boolean',
             'is_featured' => 'boolean',
