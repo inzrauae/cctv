@@ -42,6 +42,8 @@
       '@id' => url('/').'#business',
       'name' => $shop['legal_name'],
       'alternateName' => 'Last Solution',
+      'legalName' => $shop['legal_name'],
+      'identifier' => $shop['reg_no'] ? ['@type' => 'PropertyValue', 'propertyID' => 'Company registration number (Sri Lanka)', 'value' => $shop['reg_no']] : null,
       'description' => 'CCTV installation, repair and service, alarm systems, smart door locks, intercoms, networking and Wi-Fi, smart home devices, A/C and appliance repair, solar power and battery backup in Kandy, Sri Lanka.',
       'url' => url('/'),
       'logo' => asset('assets/last-solution-logo.png'),

@@ -31,7 +31,7 @@
   <div class="topbar"><div class="wrap topbar-inner"><div class="top-contact">
     <a href="{{ $shop['maps_url'] }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-pin"/></svg>Kandy, Sri Lanka</a>
     <a href="tel:{{ $shop['phone'] }}"><svg class="icon"><use href="#icon-phone"/></svg>Hotline {{ $shop['phone_display'] }}</a>
-  </div><div class="top-right"><span class="top-tagline">CCTV · Security · Smart home · A/C · Solar</span>@include('partials.social', ['class' => 'social-top'])</div></div></div>
+  </div>@if ($shop['reg_no'])<span class="top-reg"><b>{{ $shop['legal_name'] }}</b> · Reg. No. {{ $shop['reg_no'] }}</span>@endif<div class="top-right"><span class="top-tagline">CCTV · Security · Smart home · A/C · Solar</span>@include('partials.social', ['class' => 'social-top'])</div></div></div>
 
   <header class="masthead"><div class="wrap header">
     <a class="brand" href="{{ route('home') }}" aria-label="{{ $shop['name'] }} home"><img class="logo" src="{{ asset('assets/last-solution-logo.png') }}" {{ responsive_img('assets/last-solution-logo.png', '(max-width:700px) 100px, 130px') }} width="538" height="314" alt="Last Solution"></a>
@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <div class="wrap footer-bottom"><span>© {{ date('Y') }} {{ $shop['legal_name'] }}. All rights reserved.</span><span>Secure your life, anytime &amp; anywhere.</span><span class="footer-credit">Developed by <a href="https://seoconsultantsrilanka.com/" target="_blank" rel="noopener">Buddhika S Weerasekara</a></span></div>
+    <div class="wrap footer-bottom"><span>© {{ date('Y') }} {{ $shop['legal_name'] }}@if ($shop['reg_no']) (Reg. No. {{ $shop['reg_no'] }})@endif. All rights reserved.</span><span>Secure your life, anytime &amp; anywhere.</span><span class="footer-credit">Developed by <a href="https://seoconsultantsrilanka.com/" target="_blank" rel="noopener">Buddhika S Weerasekara</a></span></div>
   </footer>
 
   {{-- Repair booking --}}

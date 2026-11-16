@@ -166,7 +166,7 @@ $repairServices = [
 return [
     'name' => env('APP_NAME', 'Last Solution (Pvt) Ltd'),
     'legal_name' => 'Last Solution (Pvt) Ltd',
-    'reg_no' => '',
+    'reg_no' => 'PV 00262091', // company registration number (Registrar of Companies, Sri Lanka)
     'incorporated' => '',
     'phone' => env('SHOP_PHONE', '+94767223260'),
     'phone_display' => env('SHOP_PHONE_DISPLAY', '076 722 3260'),
