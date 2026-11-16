@@ -16,14 +16,14 @@
       @endforeach
     </div>
     <div class="hero-fade" aria-hidden="true"></div>
-    <h1 class="visually-hidden">Last Solution: CCTV, security, smart home, networking, A/C and appliance repair, solar and battery backup in Kandy</h1>
 
     <div class="wrap security-hero-inner">
       <div class="hero-copy-stack">
         @foreach ($slides as $i => [$file, $focus, $kicker, $headline, $highlight, $text, $slug, $tab])
           <div @class(['security-copy', 'hero-copy', 'is-active' => $i === 0]) data-copy @if ($i > 0) inert aria-hidden="true" @endif>
             <div class="eyebrow"><span class="status-dot"></span>{{ highlight_kandy($kicker) }}</div>
-            <p class="hero-title">{{ $headline }}<br><em>{{ $highlight }}</em></p>
+            {{-- The first slide's headline is the page's H1; the other slides use plain text. --}}
+            @if ($i === 0)<h1 class="hero-title">{{ $headline }}<br><em>{{ $highlight }}</em></h1>@else<p class="hero-title">{{ $headline }}<br><em>{{ $highlight }}</em></p>@endif
             <p>{{ $text }}</p>
             <div class="buttons">
               <a class="button red" href="{{ whatsapp_url('Hi Last Solution, I would like a quote for '.Str::lower($tab).'.') }}" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-whatsapp"/></svg>Get a quote<svg class="icon"><use href="#icon-arrow"/></svg></a>
